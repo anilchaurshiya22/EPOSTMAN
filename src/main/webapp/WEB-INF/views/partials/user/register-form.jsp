@@ -12,34 +12,32 @@
 </head>
 <body>
 	<div class="row">
-		<div class="small-4 small-centered columns">
+		<div class="small-8 small-centered columns">
 			<form method="post" action="<c:url value='j_spring_security_check'/>">
 				<fieldset>
-					<legend>E-PostMan: Login</legend>
-					<c:if test="${error}">
-						<div class="label alert login-error">Invalid login or
-							password.</div>
-					</c:if>
+					<legend>E-PostMan: Register</legend>
 					<div class="row">
-						<div class="large-12 columns">
-							<label>Username <input type="text" name="j_username"
-								id="j_username" />
-							</label>
+						<div class="large-3 columns">
+							<label class="right">First Name</label>
+						</div>
+						<div class="large-9 columns">
+							<input type="text" />
 						</div>
 					</div>
 					<div class="row">
-						<div class="large-12 columns">
-							<label>Password <input type="text" type="password"
-								name="j_password" id="j_password" />
-							</label>
+						<div class="large-3 columns">
+							<label class="right">Last Name</label>
+						</div>
+						<div class="large-9 columns">
+							<input type="text" />
 						</div>
 					</div>
 					<div class="row">
-						<div class="large-12 columns">
-							<label>
-								<input type="submit" value="LOGIN" class="button tiny" />
-								<a href="<spring:url value="/register"></spring:url>" class="right">Register</a>
-							</label>
+						<div class="large-3 columns">
+							<label class="right">Email</label>
+						</div>
+						<div class="large-9 columns">
+							<input type="text" />
 						</div>
 					</div>
 				</fieldset>
