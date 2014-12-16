@@ -85,7 +85,7 @@ public class User implements UserDetails, CredentialsContainer {
 		return username;
 	}
 
-	public void setUserName(String username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 

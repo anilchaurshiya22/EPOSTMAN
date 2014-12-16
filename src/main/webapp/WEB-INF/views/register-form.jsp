@@ -18,7 +18,10 @@
 				<fieldset>
 					<legend>E-PostMan: Register</legend>
 					
-						<div class="label alert register-error">${message}</div>
+					
+					<c:if test="${message != null}">
+					<div class="label alert register-error">${message}</div>
+					</c:if>
 					
 					<div class="row">
 						<div class="large-3 columns">
