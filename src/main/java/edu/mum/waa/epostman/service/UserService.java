@@ -1,5 +1,7 @@
 package edu.mum.waa.epostman.service;
 
-public interface UserService {
+import edu.mum.waa.epostman.domain.User;
 
+public interface UserService {
+	User registerUser(User user);
 }

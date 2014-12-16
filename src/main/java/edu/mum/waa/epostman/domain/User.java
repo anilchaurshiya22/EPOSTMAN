@@ -16,8 +16,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="USER")
-public class User implements UserDetails, CredentialsContainer{
+@Table(name = "USER")
+public class User implements UserDetails, CredentialsContainer {
 
 	/**
 	 * 
@@ -41,9 +41,15 @@ public class User implements UserDetails, CredentialsContainer{
 	@Column(name = "LASTNAME")
 	private String lastName;
 
+	@Column(name = "GENDER")
+	private Character gender;
+	
+	@Column(name = "CONTACT_NUMBER")
+	private Character contactNumber;
+
 	@Column(name = "STATUS")
 	private short status;
-	
+
 	@Column(name = "EMAIL")
 	private String email;
 
@@ -52,7 +58,7 @@ public class User implements UserDetails, CredentialsContainer{
 
 	@Column(name = "LASTLOGINDATE")
 	private Date lastLoginDate;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -125,11 +131,10 @@ public class User implements UserDetails, CredentialsContainer{
 		this.lastLoginDate = lastLoginDate;
 	}
 
-	public String toString(){
-		return getFirstName()+" "+ getLastName();		
+	public String toString() {
+		return getFirstName() + " " + getLastName();
 	}
-	
-	
+
 	@Transient
 	private Collection<GrantedAuthority> authorities;
 
@@ -140,10 +145,10 @@ public class User implements UserDetails, CredentialsContainer{
 		this.loginPassword = null;
 	}
 
-	public Collection<? extends GrantedAuthority> getAuthorities() {		
+	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
-	}	
-	
+	}
+
 	public void setAuthorities(Collection<GrantedAuthority> authorities) {
 		this.authorities = authorities;
 	}
@@ -156,11 +161,11 @@ public class User implements UserDetails, CredentialsContainer{
 		return getLoginId();
 	}
 
-	public boolean isAccountNonExpired() {		
+	public boolean isAccountNonExpired() {
 		return true;
 	}
 
-	public boolean isAccountNonLocked() {		
+	public boolean isAccountNonLocked() {
 		return true;
 	}
 
@@ -168,9 +173,25 @@ public class User implements UserDetails, CredentialsContainer{
 		return true;
 	}
 
-	public boolean isEnabled() {		
-		return status==1;
+	public boolean isEnabled() {
+		return status == 1;
+	}
+
+	public Character getGender() {
+		return gender;
+	}
+
+	public void setGender(Character gender) {
+		this.gender = gender;
+	}
+
+	public Character getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(Character contactNumber) {
+		this.contactNumber = contactNumber;
 	}
 	
-	
+
 }

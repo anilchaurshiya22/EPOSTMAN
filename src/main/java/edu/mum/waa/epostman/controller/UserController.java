@@ -1,13 +1,25 @@
 package edu.mum.waa.epostman.controller;
 
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import edu.mum.waa.epostman.domain.User;
+import edu.mum.waa.epostman.service.UserService;
 
 @Controller
 @RequestMapping(value = "")
 public class UserController {
+	@Autowired
+	private UserService userService;
+	private String responseMessage;
+
 	private ModelAndView modelAndView;
 
 	public UserController() {
@@ -28,10 +40,28 @@ public class UserController {
 
 	}
 
-	@RequestMapping(value = "/register")
-	public String registerPage() {
-		//modelAndView.addObject("partials", "user/register-form");
+	@RequestMapping(value = "/registerUser")
+	public String registerPage(@ModelAttribute("user") @Valid User newUser,
+			BindingResult result, Model model) {
+
+		if (result.hasErrors()) {
+			return "add-user";
+		}
+		User user = userService.registerUser(newUser);
+		if (user != null) {
+
+			return "add-user";
+		}
+		// modelAndView.addObject("partials", "user/register-form");
 		return "partials/user/register-form";
+	}
+
+	public String getResponseMessage() {
+		return responseMessage;
+	}
+
+	public void setResponseMessage(String responseMessage) {
+		this.responseMessage = responseMessage;
 	}
 
 }
