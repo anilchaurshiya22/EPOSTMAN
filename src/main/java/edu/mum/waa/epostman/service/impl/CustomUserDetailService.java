@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.mum.waa.epostman.domain.Role;
 import edu.mum.waa.epostman.domain.User;
 import edu.mum.waa.epostman.service.UserService;
 
@@ -30,19 +31,19 @@ public class CustomUserDetailService implements UserDetailsService {
 		return user;
 	}
 
-	public Collection<GrantedAuthority> getAuthorities(int role) {
+	public Collection<GrantedAuthority> getAuthorities(Role role) {
 		List<GrantedAuthority> authList = getGrantedAuthorities(getRoles(role));
 		return authList;
 	}	
 
 	
 	// fetch roles from user groups
-	public List<String> getRoles(int role) {
+	public List<String> getRoles(Role role) {
 		List<String> roles = new ArrayList<String>();
-		if (role == 1) {
+		if (role == Role.Admin) {
 			roles.add("ROLE_USER");
 			roles.add("ROLE_ADMIN");
-		} else if (role == 2) {
+		} else if (role == Role.User) {
 			roles.add("ROLE_USER");
 		}
 		return roles;
