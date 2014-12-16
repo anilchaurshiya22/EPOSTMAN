@@ -72,9 +72,10 @@ public class User implements UserDetails, CredentialsContainer {
 
 	@Transient
 	private String confirmLoginPassword;
+
 	@Transient
 	private Collection<GrantedAuthority> authorities;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -196,6 +197,7 @@ public class User implements UserDetails, CredentialsContainer {
 	}
 
 	public void eraseCredentials() {
+
 		this.loginPassword = null;
 	}
 
