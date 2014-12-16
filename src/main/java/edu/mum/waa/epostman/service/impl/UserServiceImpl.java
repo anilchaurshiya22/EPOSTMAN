@@ -18,8 +18,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public User registerUser(User user) {
-		user.setStatus(UserStatus.Blocked);
+	public User saveUser(User user) {
+		if(user.getId() == null)
+			user.setStatus(UserStatus.Blocked);
 		return userRepository.save(user);
 	}
 
@@ -33,6 +34,10 @@ public class UserServiceImpl implements UserService {
 
 	public User find(Long id) {
 		return userRepository.findOne(id);
+	}
+	
+	public void deleteUser(long id) {
+		userRepository.delete(id);
 	}
 
 	public User findUserByLoginId(String loginId) {

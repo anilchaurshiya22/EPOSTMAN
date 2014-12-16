@@ -7,31 +7,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>E-PostMan</title>
-<link rel="stylesheet" href="resource/css/foundation.css"></link>
-<link rel="stylesheet" href="resource/css/main.css"></link>
+<c:set var="base" value="${pageContext.servletContext.contextPath}" />
+<link rel="stylesheet" href="${base}/resource/css/foundation.css"></link>
+<link rel="stylesheet" href="${base}resource/css/main.css"></link>
 </head>
 <body>
 	<div class="row">
 		<div class="small-12 small-centered columns">
-			<div class="icon-bar five-up"  style="background-color: rgb(67, 172, 106);">
+			<div class="icon-bar six-up"  style="background-color: rgb(67, 172, 106);">
 				<a href="<c:url value="/dashboard" />" class="item">
-					<img src="resource/images/home.png">
+					<img src="${base}/resource/images/home.png">
 					<label>Dashboard</label>
 				</a> 
 				<a href="<c:url value="/users" />" class="item"> 
-					<img src="resource/images/user.png">
+					<img src="${base}/resource/images/user.png">
 					<label>Users</label>
 				</a> 
 				<a  href="<c:url value="/mailbox" />" class="item">
-					<img src="resource/images/mailbox.png">
+					<img src="${base}/resource/images/mailbox.png">
 					<label>Mail Box</label>
 				</a> 
+				<a  href="<c:url value="/mail" />" class="item">
+					<img src="${base}/resource/images/email.png">
+					<label>Mail</label>
+				</a> 
 				<a  href="<c:url value="settings" />" class="item">
-					<img src="resource/images/setting.png">
+					<img src="${base}/resource/images/setting.png">
 					<label>Settings</label>
 				</a> 
 				<a href="<c:url value="/j_spring_security_logout" />" class="item"> 
-					<img src="resource/images/logout.png">
+					<img src="${base}/resource/images/logout.png">
 					<label>Logout</label>
 				</a>
 			</div>

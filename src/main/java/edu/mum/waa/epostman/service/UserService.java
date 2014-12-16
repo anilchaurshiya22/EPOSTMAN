@@ -6,7 +6,7 @@ import edu.mum.waa.epostman.domain.User;
 
 public interface UserService {
 
-	User registerUser(User user);
+	User saveUser(User user);
 	
 	List<User> findAll();
 	
@@ -15,4 +15,6 @@ public interface UserService {
 	User find(Long id);
 	
 	User findUserByLoginId(String loginId);
+	
+	void deleteUser(long id);
 }
