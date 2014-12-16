@@ -31,7 +31,7 @@ public class UserController {
 	@RequestMapping(value = "/register")
 	public String registerPage() {
 		//modelAndView.addObject("partials", "user/register-form");
-		return "partials/user/register-form";
+		return "register-form";
 	}
 
 }
