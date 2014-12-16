@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.waa.epostman.domain.User;
+import edu.mum.waa.epostman.domain.UserStatus;
 import edu.mum.waa.epostman.repository.UserRepository;
 import edu.mum.waa.epostman.service.UserService;
 
@@ -18,7 +19,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	public User registerUser(User user) {
-		user.setStatus(0);
+		user.setStatus(UserStatus.Blocked);
 		return userRepository.save(user);
 	}
 

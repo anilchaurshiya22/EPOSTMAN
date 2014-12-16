@@ -55,9 +55,9 @@ public class User implements UserDetails, CredentialsContainer {
 	private String contactNumber;
 
 	@Column(name = "STATUS", nullable = false, length = 1)
-	private int status;
+	private UserStatus status;
 
-	@Column(name = "EMAIL")
+	@Column(unique = true, nullable = false,name = "EMAIL")
 	@Email
 	private String email;
 
@@ -67,8 +67,8 @@ public class User implements UserDetails, CredentialsContainer {
 	@Column(name = "LASTLOGINDATE")
 	private Date lastLoginDate;
 
-	@Column(name = "ROLE")
-	private int role;
+	@Column(name = "ROLE",nullable = false)
+	private Role role;
 
 	@Transient
 	private String confirmLoginPassword;	
@@ -88,7 +88,7 @@ public class User implements UserDetails, CredentialsContainer {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
+	
 	public String getLoginPassword() {
 		return loginPassword;
 	}
@@ -111,13 +111,13 @@ public class User implements UserDetails, CredentialsContainer {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
+	}	
 
-	public int getStatus() {
+	public UserStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(UserStatus status) {
 		this.status = status;
 	}
 
@@ -173,15 +173,14 @@ public class User implements UserDetails, CredentialsContainer {
 		this.confirmLoginPassword = confirmLoginPassword;
 	}
 	
-	public int getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
-	
-	
+
 	@Transient
 	private Collection<GrantedAuthority> authorities;
 
@@ -217,7 +216,7 @@ public class User implements UserDetails, CredentialsContainer {
 	}
 
 	public boolean isEnabled() {
-		return status == 1;
+		return getStatus()==UserStatus.Active;
 	}
 
 }
