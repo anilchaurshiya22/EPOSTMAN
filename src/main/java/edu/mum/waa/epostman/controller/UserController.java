@@ -45,15 +45,18 @@ public class UserController {
 			BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
-			return "add-user";
+			return "partials/user/register-form";
 		}
 		User user = userService.registerUser(newUser);
 		if (user != null) {
-
-			return "add-user";
+			responseMessage = "User registered successfully.";
+			return "partials/user/register-form";
+		} else {
+			responseMessage = "Sorry!!! Problem Occured in User Registration.";
+			return "partials/user/register-form";
 		}
 		// modelAndView.addObject("partials", "user/register-form");
-		return "partials/user/register-form";
+
 	}
 
 	public String getResponseMessage() {
