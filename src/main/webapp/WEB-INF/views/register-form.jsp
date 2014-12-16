@@ -14,47 +14,107 @@
 <body>
 	<div class="row">
 		<div class="small-8 small-centered columns">
-			<form:form modelAttibute="user" method="post" action="/process-register">
+			<form:form modelAttribute="user" method="post" action="register">
 				<fieldset>
 					<legend>E-PostMan: Register</legend>
 					<div class="row">
 						<div class="large-3 columns">
-							<label class="right">First Name</label>
+							<label class="right"><spring:message code="user.firstname.label" /></label>
 						</div>
-						<div class="large-9 columns">
-							<form:input type="text" path="firstName" id="firstName" />
+						<div class="large-6 columns">
+							<form:input type="text" path="firstName" />
+						</div>
+						<div class="large-3 columns">
+							<form:errors class="label alert" path="firstName" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="large-3 columns">
-							<label class="right">Last Name</label>
+							<label class="right"><spring:message code="user.lastname.label" /></label>
 						</div>
-						<div class="large-9 columns">
+						<div class="large-6 columns">
 							<form:input type="text" path="lastName" />
 						</div>
+						<div class="large-3 columns">
+							<form:errors class="label alert" path="lastName" />
+						</div>
 					</div>
 					<div class="row">
 						<div class="large-3 columns">
-							<label class="right">Email</label>
+							<label class="right"><spring:message code="user.gender.label" /></label>
 						</div>
-						<div class="large-9 columns">
+						<div class="large-6 columns">
+							<form:radiobutton path="gender" value="M" /> Male
+							<form:radiobutton path="gender" value="F" /> Female
+						</div>
+						<div class="large-3 columns">
+							<form:errors class="label alert" path="gender" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-3 columns">
+							<label class="right"><spring:message code="user.email.label" /></label>
+						</div>
+						<div class="large-6 columns">
 							<form:input type="text" path="email" />
 						</div>
-					</div>
-					<div class="row">
 						<div class="large-3 columns">
-							<label class="right">Password</label>
-						</div>
-						<div class="large-9 columns">
-							<form:input type="password" path="password" />
+							<form:errors class="label alert" path="email" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="large-3 columns">
-							<label class="right">Confirm Password</label>
+							<label class="right"><spring:message code="user.contact.label" /></label>
 						</div>
-						<div class="large-9 columns">
-							<form:input type="password" path="confirm_password" />
+						<div class="large-6 columns">
+							<form:input type="text" path="contactNumber" />
+						</div>
+						<div class="large-3 columns">
+							<form:errors class="label alert" path="contactNumber" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-3 columns">
+							<label class="right"><spring:message code="user.username.label" /></label>
+						</div>
+						<div class="large-6 columns">
+							<form:input type="text" path="userName" />
+						</div>
+						<div class="large-3 columns">
+							<form:errors class="label alert" path="userName" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-3 columns">
+							<label class="right"><spring:message code="user.password.label" /></label>
+						</div>
+						<div class="large-6 columns">
+							<form:input type="password" path="loginPassword" />
+						</div>
+						<div class="large-3 columns">
+							<form:errors class="label alert" path="loginPassword" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-3 columns">
+							<label class="right"><spring:message code="user.cpassword.label" /></label>
+						</div>
+						<div class="large-6 columns">
+							<form:input type="password" path="confirmLoginPassword" />
+						</div>
+						<div class="large-3 columns">
+							<form:errors class="label alert" path="confirmLoginPassword" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="large-3 columns">
+							<label class="right"><spring:message code="user.desc.label" /></label>
+						</div>
+						<div class="large-6 columns">
+							<form:textarea path="description"></form:textarea>
+						</div>
+						<div class="large-3 columns">
+							<form:errors class="label alert" path="description" />
 						</div>
 					</div>
 					<div class="row">
