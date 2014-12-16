@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	public User registerUser(User user) {
-		user.setStatus(new Character('N'));
+		user.setStatus(0);
 		return userRepository.save(user);
 	}
 

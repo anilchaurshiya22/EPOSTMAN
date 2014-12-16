@@ -81,10 +81,10 @@
 							<label class="right"><spring:message code="user.username.label" /></label>
 						</div>
 						<div class="large-6 columns">
-							<form:input type="text" path="userName" />
+							<form:input type="text" path="username" />
 						</div>
 						<div class="large-3 columns">
-							<form:errors class="label alert" path="userName" />
+							<form:errors class="label alert" path="username" />
 						</div>
 					</div>
 					<div class="row">

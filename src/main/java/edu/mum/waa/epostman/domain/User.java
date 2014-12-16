@@ -51,11 +51,11 @@ public class User implements UserDetails, CredentialsContainer {
 	private Character gender;
 
 	@Column(name = "CONTACT_NUMBER")
-	@Pattern(regexp = "[0-9]{10}", message = "{contact.register.pattern}")
+	@Pattern(regexp = "[0-9]{10}", message = "Invalid Contact Number")
 	private String contactNumber;
 
 	@Column(name = "STATUS", nullable = false, length = 1)
-	private Character status;
+	private int status;
 
 	@Column(name = "EMAIL")
 	@Email
@@ -71,10 +71,7 @@ public class User implements UserDetails, CredentialsContainer {
 	private int role;
 
 	@Transient
-	private String confirmLoginPassword;
-
-	@Transient
-	private Collection<GrantedAuthority> authorities;
+	private String confirmLoginPassword;	
 
 	public Long getId() {
 		return id;
@@ -88,8 +85,8 @@ public class User implements UserDetails, CredentialsContainer {
 		return username;
 	}
 
-	public void setUsername(String userName) {
-		this.username = userName;
+	public void setUserName(String username) {
+		this.username = username;
 	}
 
 	public String getLoginPassword() {
@@ -116,11 +113,11 @@ public class User implements UserDetails, CredentialsContainer {
 		this.lastName = lastName;
 	}
 
-	public Character getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
-	public void setStatus(Character status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -152,26 +149,6 @@ public class User implements UserDetails, CredentialsContainer {
 		return getFirstName() + " " + getLastName();
 	}
 
-	public String getPassword() {
-		return getLoginPassword();
-	}
-
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	public boolean isEnabled() {
-		return status == 1;
-	}
-
 	public Character getGender() {
 		return gender;
 	}
@@ -195,20 +172,6 @@ public class User implements UserDetails, CredentialsContainer {
 	public void setConfirmLoginPassword(String confirmLoginPassword) {
 		this.confirmLoginPassword = confirmLoginPassword;
 	}
-
-	public void eraseCredentials() {
-
-		this.loginPassword = null;
-	}
-
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
-
-	}
-
-	public void setAuthorities(Collection<GrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
 	
 	public int getRole() {
 		return role;
@@ -216,6 +179,45 @@ public class User implements UserDetails, CredentialsContainer {
 
 	public void setRole(int role) {
 		this.role = role;
-
 	}
+	
+	
+	@Transient
+	private Collection<GrantedAuthority> authorities;
+
+	// ~ Methods for spring-security
+	// ========================================================================================================
+
+	public void eraseCredentials() {
+		this.loginPassword = null;
+	}
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return authorities;
+	}
+
+	public void setAuthorities(Collection<GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
+
+	public String getPassword() {
+		return getLoginPassword();
+	}	
+
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	public boolean isEnabled() {
+		return status == 1;
+	}
+
 }
