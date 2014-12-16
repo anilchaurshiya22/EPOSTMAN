@@ -56,10 +56,12 @@ public class UserController {
 		}
 		User user = userService.registerUser(newUser);
 		if (user != null) {
-
-			return "add-user";
+			responseMessage = "User registered successfully.";
+			return "partials/user/register-form";
+		} else {
+			responseMessage = "Sorry!!! Problem Occured in User Registration.";
+			return "partials/user/register-form";
 		}
-		return "register-form";
 	}
 
 	public String getResponseMessage() {

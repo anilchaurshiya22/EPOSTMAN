@@ -118,7 +118,9 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="large-12 columns">
+						<div class="large-3 columns">
+						</div>
+						<div class="large-9 columns">
 							<label>
 								<input type="submit" value="REGISTER" class="button tiny" />
 							</label>
