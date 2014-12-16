@@ -22,7 +22,7 @@
 					<img src="resource/images/user.png">
 					<label>Users</label>
 				</a> 
-				<a  href="<c:url value="/mailbox" />" class="item">
+				<a  href="<c:url value="/mailBox" />" class="item">
 					<img src="resource/images/mailbox.png">
 					<label>Mail Box</label>
 				</a> 

@@ -23,13 +23,16 @@ public class MailBox {
 	private Long id;
 
 	@NotNull
-	/*@Min(1)
-	@Max(999)*/
+	/*
+	 * @Min(1)
+	 * 
+	 * @Max(999)
+	 */
 	@Column(name = "NUMBER", nullable = false)
 	private Integer mNumber;
 
 	@Column(name = "STATUS", nullable = false)
-	private Character Status;
+	private Character status;
 	@NotEmpty
 	@Column(name = "CODE")
 	private String code;
@@ -51,11 +54,11 @@ public class MailBox {
 	}
 
 	public Character getStatus() {
-		return Status;
+		return status;
 	}
 
 	public void setStatus(Character status) {
-		Status = status;
+		this.status = status;
 	}
 
 	public String getCode() {
