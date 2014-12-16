@@ -17,6 +17,9 @@
 			<form:form modelAttribute="user" method="post" action="register">
 				<fieldset>
 					<legend>E-PostMan: Register</legend>
+					
+						<div class="label alert register-error">${message}</div>
+					
 					<div class="row">
 						<div class="large-3 columns">
 							<label class="right"><spring:message code="user.firstname.label" /></label>

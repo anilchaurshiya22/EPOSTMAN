@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Override
 	public User registerUser(User user) {
+		user.setStatus(new Character('N'));
 		return userRepository.save(user);
 	}
 

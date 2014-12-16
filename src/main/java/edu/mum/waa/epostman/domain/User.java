@@ -66,7 +66,7 @@ public class User implements UserDetails, CredentialsContainer {
 	@Column(name = "DESCRIPTION")
 	private String description;
 
-	@Column(name = "LASTLOGINDATE",nullable=false)
+	@Column(name = "LASTLOGINDATE")
 	private Date lastLoginDate;
 
 	@Transient

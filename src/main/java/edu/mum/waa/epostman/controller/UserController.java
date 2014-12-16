@@ -19,7 +19,6 @@ import edu.mum.waa.epostman.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	private String responseMessage;
 
 	private ModelAndView modelAndView;
 
@@ -56,20 +55,16 @@ public class UserController {
 		}
 		User user = userService.registerUser(newUser);
 		if (user != null) {
-			responseMessage = "User registered successfully.";
-			return "partials/user/register-form";
+			return "redirect:/register-success";
 		} else {
-			responseMessage = "Sorry!!! Problem Occured in User Registration.";
-			return "partials/user/register-form";
+			model.addAttribute("message", "Sorry!!! Problem Occured in User Registration.");
+			return "register-form";
 		}
 	}
 
-	public String getResponseMessage() {
-		return responseMessage;
-	}
-
-	public void setResponseMessage(String responseMessage) {
-		this.responseMessage = responseMessage;
+	@RequestMapping("/register-success")
+	public String registerSuccessPage() {
+		return "register-success";
 	}
 
 }
