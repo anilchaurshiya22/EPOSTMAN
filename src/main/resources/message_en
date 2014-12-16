@@ -1,7 +1,0 @@
-user.fname.label=First Name
-user.lname.label=Last Name
-user.gender.label=Gender
-user.contactNumber.label=Contact Number
-user.email.label=E-mail
-user.password.label=Password
-user.desc.label=Description

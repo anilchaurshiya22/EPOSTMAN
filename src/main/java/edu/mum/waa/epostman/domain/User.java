@@ -10,7 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +22,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "USER")
 public class User implements UserDetails, CredentialsContainer {
-
 	/**
 	 * 
 	 */
@@ -34,22 +37,28 @@ public class User implements UserDetails, CredentialsContainer {
 	@Column(name = "LOGINPASSWORD", nullable = false)
 	private String loginPassword;
 
-	@Column(name = "FIRSTNAME")
+	@Column(name = "FIRSTNAME", nullable = false)
+	@NotEmpty
+	@Size(min = 2, max = 40)
 	private String firstName;
 
-	@Column(name = "LASTNAME")
+	@Column(name = "LASTNAME", nullable = false)
+	@NotEmpty
+	@Size(min = 2, max = 100)
 	private String lastName;
 
-	@Column(name = "GENDER")
+	@Column(name = "GENDER", nullable = false, length = 1)
 	private Character gender;
-	
-	@Column(name = "CONTACT_NUMBER")
-	private Character contactNumber;
 
-	@Column(name = "STATUS")
-	private short status;
+	@Column(name = "CONTACT_NUMBER")
+	@Pattern(regexp = "[0-9]{10}", message = "{contact.register.pattern}")
+	private String contactNumber;
+
+	@Column(name = "STATUS", nullable = false, length = 1)
+	private Character status;
 
 	@Column(name = "EMAIL")
+	@Email
 	private String email;
 
 	@Column(name = "DESCRIPTION")
@@ -57,10 +66,13 @@ public class User implements UserDetails, CredentialsContainer {
 
 	@Column(name = "LASTLOGINDATE")
 	private Date lastLoginDate;
-	
-	@Column(name="ROLE")
+
+	@Column(name = "ROLE")
 	private int role;
-	
+
+	@Transient
+	private String confirmLoginPassword;
+
 	public Long getId() {
 		return id;
 	}
@@ -101,11 +113,11 @@ public class User implements UserDetails, CredentialsContainer {
 		this.lastName = lastName;
 	}
 
-	public short getStatus() {
+	public Character getStatus() {
 		return status;
 	}
 
-	public void setStatus(short status) {
+	public void setStatus(Character status) {
 		this.status = status;
 	}
 
@@ -137,27 +149,9 @@ public class User implements UserDetails, CredentialsContainer {
 		return getFirstName() + " " + getLastName();
 	}
 
-	@Transient
-	private Collection<GrantedAuthority> authorities;
-
-	// ~ Methods for spring-security
-	// ========================================================================================================
-
-	public void eraseCredentials() {
-		this.loginPassword = null;
-	}
-
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return authorities;
-	}
-
-	public void setAuthorities(Collection<GrantedAuthority> authorities) {
-		this.authorities = authorities;
-	}
-
 	public String getPassword() {
 		return getLoginPassword();
-	}	
+	}
 
 	public boolean isAccountNonExpired() {
 		return true;
@@ -183,12 +177,29 @@ public class User implements UserDetails, CredentialsContainer {
 		this.gender = gender;
 	}
 
-	public Character getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(Character contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
+	}
+
+	public String getConfirmLoginPassword() {
+		return confirmLoginPassword;
+	}
+
+	public void setConfirmLoginPassword(String confirmLoginPassword) {
+		this.confirmLoginPassword = confirmLoginPassword;
+	}
+
+	public void eraseCredentials() {
+
+	}
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+
 	}
 
 	public int getRole() {
@@ -197,5 +208,6 @@ public class User implements UserDetails, CredentialsContainer {
 
 	public void setRole(int role) {
 		this.role = role;
-	}	
+
+	}
 }
