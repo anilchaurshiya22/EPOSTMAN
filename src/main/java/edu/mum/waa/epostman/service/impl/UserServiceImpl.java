@@ -1,5 +1,7 @@
 package edu.mum.waa.epostman.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,9 +17,24 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Override
+	
 	public User registerUser(User user) {
 		return userRepository.save(user);
+	}
+
+
+	public List<User> findAll() {
+		return (List<User>) userRepository.findAll();
+	}
+
+
+	public User find(Long id) {
+		return userRepository.findOne(id);
+	}
+
+
+	public User findUserByLoginId(String loginId) {
+		return userRepository.findUserByLoginId(loginId);
 	}
 
 }

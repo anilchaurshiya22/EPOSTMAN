@@ -29,7 +29,6 @@ public class UserController {
 
 	@RequestMapping(value = "/u/alluser")
 	public String getAllUser(Model model) {
-
 		return "userlist";
 
 	}

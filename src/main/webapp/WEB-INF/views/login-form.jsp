@@ -29,7 +29,7 @@
 					</div>
 					<div class="row">
 						<div class="large-12 columns">
-							<label>Password <input type="text" type="password"
+							<label>Password <input type="password"
 								name="j_password" id="j_password" />
 							</label>
 						</div>

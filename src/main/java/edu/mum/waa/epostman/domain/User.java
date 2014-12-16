@@ -23,14 +23,13 @@ public class User implements UserDetails, CredentialsContainer {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(unique = true, nullable = false, name = "LOGINID")
-	private String loginId;
+	@Column(unique = true, nullable = false, name = "USERNAME")
+	private String username;
 
 	@Column(name = "LOGINPASSWORD", nullable = false)
 	private String loginPassword;
@@ -58,7 +57,10 @@ public class User implements UserDetails, CredentialsContainer {
 
 	@Column(name = "LASTLOGINDATE")
 	private Date lastLoginDate;
-
+	
+	@Column(name="ROLE")
+	private int role;
+	
 	public Long getId() {
 		return id;
 	}
@@ -67,12 +69,12 @@ public class User implements UserDetails, CredentialsContainer {
 		this.id = id;
 	}
 
-	public String getLoginId() {
-		return loginId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
+	public void setUsername(String userName) {
+		this.username = userName;
 	}
 
 	public String getLoginPassword() {
@@ -155,11 +157,7 @@ public class User implements UserDetails, CredentialsContainer {
 
 	public String getPassword() {
 		return getLoginPassword();
-	}
-
-	public String getUsername() {
-		return getLoginId();
-	}
+	}	
 
 	public boolean isAccountNonExpired() {
 		return true;
@@ -192,6 +190,12 @@ public class User implements UserDetails, CredentialsContainer {
 	public void setContactNumber(Character contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-	
 
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}	
 }
