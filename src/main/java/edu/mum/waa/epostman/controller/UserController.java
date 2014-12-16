@@ -24,12 +24,20 @@ public class UserController {
 
 	public UserController() {
 		modelAndView = new ModelAndView("layouts/main");
-		modelAndView.addObject("abc", "cde");
 	}
 
-	@RequestMapping(value = "/u/alluser")
-	public String getAllUser(Model model) {
-		return "userlist";
+	@RequestMapping(value = "/dashboard")
+	public ModelAndView showDashboard() {
+		modelAndView.addObject("partials", "user/dashboard");
+		return modelAndView;
+
+	}
+
+	@RequestMapping(value = "/users")
+	public ModelAndView getAllUser(Model model) {
+		modelAndView.addObject("users", userService.getRegisteredUsers());
+		modelAndView.addObject("partials", "user/user-list");
+		return modelAndView;
 
 	}
 

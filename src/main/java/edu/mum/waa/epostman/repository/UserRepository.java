@@ -1,5 +1,7 @@
 package edu.mum.waa.epostman.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,5 +14,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 	
 	@Query("SELECT u FROM User u WHERE u.username=:username")
 	User findUserByLoginId(@Param("username") String key);
+	
+	@Query("SELECT u FROM User u WHERE u.role=0")
+	List<User> getRegisteredUsers();
 
 }

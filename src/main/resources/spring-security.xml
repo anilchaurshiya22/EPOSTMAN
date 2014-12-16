@@ -11,7 +11,7 @@
 		<security:intercept-url pattern="/u/*"
 			access="ROLE_ADMIN,ROLE_USER" />
 		<security:form-login login-page="/login"
-			default-target-url="/success-login" authentication-failure-url="/error-login"
+			default-target-url="/dashboard" authentication-failure-url="/error-login"
 			always-use-default-target="true" />
 		<security:logout invalidate-session="true"
 			logout-success-url="/logout" delete-cookies="JSESSIONID" />
