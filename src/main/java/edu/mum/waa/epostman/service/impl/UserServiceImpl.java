@@ -17,21 +17,18 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	
 	public User registerUser(User user) {
+		user.setStatus(new Character('N'));
 		return userRepository.save(user);
 	}
-
 
 	public List<User> findAll() {
 		return (List<User>) userRepository.findAll();
 	}
 
-
 	public User find(Long id) {
 		return userRepository.findOne(id);
 	}
-
 
 	public User findUserByLoginId(String loginId) {
 		return userRepository.findUserByLoginId(loginId);
