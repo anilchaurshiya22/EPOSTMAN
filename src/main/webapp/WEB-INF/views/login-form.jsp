@@ -37,14 +37,9 @@
 					</div>
 					<div class="row">
 						<div class="large-12 columns">
-							<label>
-<<<<<<< HEAD
-								<input type="submit" value="LOGIN" class="button tiny" />
-								<a href="<spring:url value="/u/register"></spring:url>" class="right">Register</a>
-=======
+							<label>								
 								<input type="submit" value="<spring:message code="user.login.label" />" class="button tiny" />
 								<a href="<spring:url value="/register"></spring:url>" class="right"><spring:message code="user.register.label" /></a>
->>>>>>> ee264cba7388c4c0fae307ea519345bbd3fabf9f
 							</label>
 						</div>
 					</div>

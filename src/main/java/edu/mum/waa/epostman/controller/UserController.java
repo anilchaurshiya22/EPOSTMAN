@@ -52,30 +52,7 @@ public class UserController {
 		modelAndView.addObject("users", userService.getRegisteredUsers());
 		modelAndView.addObject("partials", "user/user-list");
 		return modelAndView;
-	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String registerPage(Model model) {
-		model.addAttribute("user", new User());
-		return "register-form";
-	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String pocessRegister(@ModelAttribute("user") @Valid User newUser,
-			BindingResult result, Model model) {
-
-		if (result.hasErrors()) {
-			return "register-form";
-		}
-		User user = userService.saveUser(newUser);
-		if (user != null) {
-			return "redirect:/u/register-success";
-		} else {
-			model.addAttribute("message",
-					"Sorry!!! Problem Occured in User Registration.");
-			return "register-form";
-		}
-	}
+	}	
 
 	@RequestMapping(value = "/changePassword", method = RequestMethod.GET)
 	public ModelAndView changePassword(@ModelAttribute("user") User newUser) {

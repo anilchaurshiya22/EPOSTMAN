@@ -6,3 +6,5 @@ target/**
 WebContent/**
 .springBeans
 bin/*
+src/main/resources/application.properties
+
