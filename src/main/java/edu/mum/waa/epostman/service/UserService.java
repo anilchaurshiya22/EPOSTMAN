@@ -13,4 +13,6 @@ public interface UserService {
 	User find(Long id);
 	
 	User findUserByLoginId(String loginId);
+	
+	User changePassword(User user);
 }

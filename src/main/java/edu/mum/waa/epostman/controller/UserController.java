@@ -1,5 +1,6 @@
 package edu.mum.waa.epostman.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.waa.epostman.domain.User;
 import edu.mum.waa.epostman.service.UserService;
+import edu.mum.waa.epostman.validator.PasswordValidator;
 
 @Controller
 @RequestMapping(value = "")
 public class UserController {
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	PasswordValidator passwordValidator;
 
 	private ModelAndView modelAndView;
 
@@ -59,6 +65,33 @@ public class UserController {
 			model.addAttribute("message", "Sorry!!! Problem Occured in User Registration.");
 			return "register-form";
 		}
+	}
+	
+	@RequestMapping(value="/changePassword", method=RequestMethod.GET)
+	public String changePassword(@ModelAttribute("user")User newUser){		
+		return "change-password";		
+	}
+	
+	@RequestMapping(value="/changePassword", method=RequestMethod.POST)
+	public String changePassword(@ModelAttribute("user") @Valid User newUser,
+			BindingResult result, RedirectAttributes redirectAttr,HttpServletRequest request){	
+		User user=(User) request.getSession().getAttribute("authenitcatedUser");
+		newUser.setId(user.getId());
+		passwordValidator.validate(newUser, result);		
+		if (result.hasErrors()) {			
+			return "change-password";
+		}
+		userService.changePassword(newUser);
+		redirectAttr.addFlashAttribute("message", "Password Change Successfully!!!");
+		//redirectAttr.addFlashAttribute("user", newUser);
+		return "redirect:/userProfile";		
+	}
+	
+	@RequestMapping(value="/userProfile")
+	public String userProfile(){		
+		return "user-profile";
+
+		
 	}
 
 	@RequestMapping("/register-success")

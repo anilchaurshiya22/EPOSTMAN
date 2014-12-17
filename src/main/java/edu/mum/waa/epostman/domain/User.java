@@ -37,13 +37,11 @@ public class User implements UserDetails, CredentialsContainer {
 	@Column(name = "LOGINPASSWORD", nullable = false)
 	private String loginPassword;
 
-	@Column(name = "FIRSTNAME", nullable = false)
-	@NotEmpty
+	@Column(name = "FIRSTNAME", nullable = false)	
 	@Size(min = 2, max = 40)
 	private String firstName;
 
-	@Column(name = "LASTNAME", nullable = false)
-	@NotEmpty
+	@Column(name = "LASTNAME", nullable = false)	
 	@Size(min = 2, max = 100)
 	private String lastName;
 
@@ -71,7 +69,10 @@ public class User implements UserDetails, CredentialsContainer {
 	private Role role;
 
 	@Transient
-	private String confirmLoginPassword;	
+	private String confirmLoginPassword;
+	
+	@Transient
+	private String oldLoginPassword;
 
 	public Long getId() {
 		return id;
@@ -179,7 +180,17 @@ public class User implements UserDetails, CredentialsContainer {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}	
+
+	public String getOldLoginPassword() {
+		return oldLoginPassword;
 	}
+
+	public void setOldLoginPassword(String oldLoginPassword) {
+		this.oldLoginPassword = oldLoginPassword;
+	}
+
+
 
 	@Transient
 	private Collection<GrantedAuthority> authorities;
