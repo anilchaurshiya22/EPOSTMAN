@@ -14,6 +14,9 @@
 <body>
 	<div class="row">
 		<div class="small-8 small-centered columns">
+		
+		
+		
 			<form:form modelAttribute="user" method="post" action="register">
 				<fieldset>
 					<legend>E-PostMan: Register</legend>

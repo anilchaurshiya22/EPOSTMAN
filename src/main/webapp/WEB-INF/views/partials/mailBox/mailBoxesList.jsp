@@ -3,9 +3,16 @@
 <c:if test="${successMsg != null}">
 	<div class="panel" style="background-color: green; color: white;">${successMsg}</div>
 </c:if>
+<c:set var="base" value="${pageContext.servletContext.contextPath}" />
+<h2 style="height:61px;">
+	<img src="${base}/resource/images/mailbox.png" style="size: 10px;"> Mail Boxes
+</h2>
+<c:if test="${successMessage != null}">
+	<div class="panel" style="background-color: green; color: white;">${successMessage}</div>
+</c:if>
 
-<p>
-	<a href="<c:url value="/mailBox/addMailBox"/> ">Add New Mail Box</a>
+<p style="float:right;">
+	<a href="<c:url value="/a/mailBox/addMailBox"/> " class="button tiny">Add New Mail Box</a>
 </p>
 
 <table style="width: 100%;">

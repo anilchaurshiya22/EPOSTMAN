@@ -14,9 +14,10 @@
 <body>
 	<div class="row">
 		<div class="small-8 small-centered columns">
+		
 			<form:form modelAttribute="newMailBox" method="post" action="registerMailBox">
 				<fieldset>
-					<legend>Mail-Box: Registration</legend>
+					<legend><spring:message code="mailBox.registration.label" /></legend>
 					
 						<div class="label alert register-error">${responseMsg}</div>
 					

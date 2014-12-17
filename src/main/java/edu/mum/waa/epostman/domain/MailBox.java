@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -26,25 +28,22 @@ public class MailBox {
 	@Column(name = "ID")
 	private Long id;
 
-	@NotNull
-	/*
-	 * @Min(1)
-	 * 
-	 * @Max(999)
-	 */
 	@Column(name = "NUMBER", nullable = false)
+	@NotNull
+	@Min(1)
+	@Max(999)
 	private Integer mNumber;
 
-	@Column(name = "STATUS", nullable = false)
-	@Size(min = 1, max = 1)
+	@Column(name = "STATUS", nullable = false, length = 1)
 	private String status;
-	
-	@NotEmpty
+
 	@Column(name = "CODE")
+	@Pattern(regexp = "[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}", message = "{mailbox.code.msg}")
+	@NotEmpty
 	private String code;
-	
+
 	@OneToMany
-	@JoinColumn(name="MAILBOX_ID", referencedColumnName="ID")
+	@JoinColumn(name = "MAILBOX_ID", referencedColumnName = "ID")
 	List<User> users = new ArrayList<User>();
 
 	public Long getId() {
@@ -62,8 +61,6 @@ public class MailBox {
 	public void setmNumber(Integer mNumber) {
 		this.mNumber = mNumber;
 	}
-
-	
 
 	public String getStatus() {
 		return status;
