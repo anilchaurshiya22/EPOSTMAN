@@ -14,6 +14,9 @@
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:application.properties" />
 	</bean>
+	
+	<bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" /> 
+	
 	<!-- The jpa:repositories scans for all interfaces that extend JpaRepository 
 		and creates implementations for use at runtime. -->
 	<jpa:repositories base-package="edu.mum.waa.epostman.repository" />

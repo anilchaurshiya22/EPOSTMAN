@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "USER")
@@ -26,6 +27,7 @@ public class User implements UserDetails, CredentialsContainer {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final String defaultPicLocation = "/resource/images/user.png";
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
@@ -37,11 +39,11 @@ public class User implements UserDetails, CredentialsContainer {
 	@Column(name = "LOGINPASSWORD", nullable = false)
 	private String loginPassword;
 
-	@Column(name = "FIRSTNAME", nullable = false)	
+	@Column(name = "FIRSTNAME", nullable = false)
 	@Size(min = 2, max = 40)
 	private String firstName;
 
-	@Column(name = "LASTNAME", nullable = false)	
+	@Column(name = "LASTNAME", nullable = false)
 	@Size(min = 2, max = 100)
 	private String lastName;
 
@@ -55,7 +57,7 @@ public class User implements UserDetails, CredentialsContainer {
 	@Column(name = "STATUS", nullable = false, length = 1)
 	private UserStatus status;
 
-	@Column(unique = true, nullable = false,name = "EMAIL")
+	@Column(unique = true, nullable = false, name = "EMAIL")
 	@Email
 	private String email;
 
@@ -65,14 +67,20 @@ public class User implements UserDetails, CredentialsContainer {
 	@Column(name = "LASTLOGINDATE")
 	private Date lastLoginDate;
 
-	@Column(name = "ROLE",nullable = false)
+	@Column(name = "PICLOCATION")
+	private String picLocation;
+
+	@Column(name = "ROLE", nullable = false)
 	private Role role;
 
 	@Transient
 	private String confirmLoginPassword;
-	
+
 	@Transient
 	private String oldLoginPassword;
+
+	@Transient
+	private MultipartFile profilePic;
 
 	public Long getId() {
 		return id;
@@ -89,7 +97,7 @@ public class User implements UserDetails, CredentialsContainer {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getLoginPassword() {
 		return loginPassword;
 	}
@@ -112,7 +120,7 @@ public class User implements UserDetails, CredentialsContainer {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}	
+	}
 
 	public UserStatus getStatus() {
 		return status;
@@ -173,14 +181,14 @@ public class User implements UserDetails, CredentialsContainer {
 	public void setConfirmLoginPassword(String confirmLoginPassword) {
 		this.confirmLoginPassword = confirmLoginPassword;
 	}
-	
+
 	public Role getRole() {
 		return role;
 	}
 
 	public void setRole(Role role) {
 		this.role = role;
-	}	
+	}
 
 	public String getOldLoginPassword() {
 		return oldLoginPassword;
@@ -190,7 +198,23 @@ public class User implements UserDetails, CredentialsContainer {
 		this.oldLoginPassword = oldLoginPassword;
 	}
 
+	public String getPicLocation() {
+		if (picLocation == null)
+			picLocation = defaultPicLocation;
+		return picLocation;
+	}
 
+	public void setPicLocation(String picLocation) {
+		this.picLocation = picLocation;
+	}
+
+	public MultipartFile getProfilePic() {
+		return profilePic;
+	}
+
+	public void setProfilePic(MultipartFile profilePic) {
+		this.profilePic = profilePic;
+	}
 
 	@Transient
 	private Collection<GrantedAuthority> authorities;
@@ -212,7 +236,7 @@ public class User implements UserDetails, CredentialsContainer {
 
 	public String getPassword() {
 		return getLoginPassword();
-	}	
+	}
 
 	public boolean isAccountNonExpired() {
 		return true;
@@ -227,7 +251,7 @@ public class User implements UserDetails, CredentialsContainer {
 	}
 
 	public boolean isEnabled() {
-		return getStatus()==UserStatus.Active;
+		return getStatus() == UserStatus.Active;
 	}
 
 }

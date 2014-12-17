@@ -3,7 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <p>${responseMsg}</p>
 
-<p><a href="<c:url value="/mailBox/addMailBox"/> ">Add Mail Box</a></p>
+<p><a href="<c:url value="/a/mailBox/addMailBox"/> ">Add Mail Box</a></p>
 <table style="width: 100%;">
 	<thead>
 		<tr>
