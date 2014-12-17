@@ -4,6 +4,9 @@
 <c:if test="${successMessage != null}">
 	<div class="panel" style="background-color: green; color: white;">${successMessage}</div>
 </c:if>
+<c:if test="${errorMessage != null}">
+	<div class="panel" style="background-color: red; color: white;">${errorMessage}</div>
+</c:if>
 <table style="width: 100%;">
 	<thead>
 		<tr>
