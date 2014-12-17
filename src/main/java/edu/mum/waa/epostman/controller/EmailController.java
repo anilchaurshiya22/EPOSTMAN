@@ -29,8 +29,8 @@ public class EmailController {
 	@RequestMapping(value = "/feedback/process")
 	public ModelAndView feedbackProdess(HttpServletRequest request,
 			HttpServletResponse response) {
-		final String username = "risal.deep@gmail.com";
-		final String password = "aanidr123";
+		final String username = "epostman.devdevil@gmail.com";
+		final String password = "dev@devil";
 
 		String from = request.getParameter("from");
 		String subject = request.getParameter("subject");

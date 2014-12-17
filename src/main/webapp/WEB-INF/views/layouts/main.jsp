@@ -36,7 +36,7 @@
 				</a> 
 				</security:authorize>
 				<security:authorize access="hasAnyRole('ROLE_ADMIN')">
-				<a  href="<c:url value="/a/mail" />" class="item">
+				<a  href="<c:url value="/a/mails/" />" class="item">
 					<img src="${base}/resource/images/email.png">
 					<label>Mail</label>
 				</a> 

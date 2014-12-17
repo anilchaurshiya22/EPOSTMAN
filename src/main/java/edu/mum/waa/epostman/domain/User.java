@@ -2,19 +2,23 @@ package edu.mum.waa.epostman.domain;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -81,6 +85,10 @@ public class User implements UserDetails, CredentialsContainer {
 
 	@Transient
 	private MultipartFile profilePic;
+	
+	@OneToMany
+	@JoinColumn(name = "USERID", referencedColumnName = "ID")	
+	private Set<MailItem> mailItems = new HashSet<MailItem>();
 
 	public Long getId() {
 		return id;
@@ -215,6 +223,16 @@ public class User implements UserDetails, CredentialsContainer {
 	public void setProfilePic(MultipartFile profilePic) {
 		this.profilePic = profilePic;
 	}
+
+	public Set<MailItem> getMailItems() {
+		return mailItems;
+	}
+
+	public void setMailItems(Set<MailItem> mailItems) {
+		this.mailItems = mailItems;
+	}
+
+
 
 	@Transient
 	private Collection<GrantedAuthority> authorities;
