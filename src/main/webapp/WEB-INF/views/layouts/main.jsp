@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>E-PostMan</title>
@@ -15,23 +18,30 @@
 	<div class="row">
 		<div class="small-12 small-centered columns">
 			<div class="icon-bar six-up"  style="background-color: rgb(67, 172, 106);">
+			
 				<a href="<c:url value="/dashboard" />" class="item">
 					<img src="${base}/resource/images/home.png">
 					<label>Dashboard</label>
 				</a> 
-				<a href="<c:url value="/users" />" class="item"> 
+				<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+				<a href="<c:url value="/u//users" />" class="item"> 
 					<img src="${base}/resource/images/user.png">
 					<label>Users</label>
 				</a> 
-				<a  href="<c:url value="/mailBox" />" class="item">
+				</security:authorize>
+				<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+				<a  href="<c:url value="/a/mailBox" />" class="item">
 					<img src="${base}/resource/images/mailbox.png">
 					<label>Mail Box</label>
 				</a> 
-				<a  href="<c:url value="/mail" />" class="item">
+				</security:authorize>
+				<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+				<a  href="<c:url value="/a/mail" />" class="item">
 					<img src="${base}/resource/images/email.png">
 					<label>Mail</label>
 				</a> 
-				<a  href="<c:url value="settings" />" class="item">
+				</security:authorize>
+				<a  href="<c:url value="/u/settings" />" class="item">
 					<img src="${base}/resource/images/setting.png">
 					<label>Settings</label>
 				</a> 

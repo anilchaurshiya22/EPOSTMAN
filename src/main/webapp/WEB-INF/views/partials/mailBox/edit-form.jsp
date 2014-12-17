@@ -7,22 +7,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Register Mail Box</title>
+<title>Edit Mail Box</title>
 <link rel="stylesheet" href="resource/css/foundation.css"></link>
 <link rel="stylesheet" href="resource/css/main.css"></link>
 </head>
 <body>
 	<div class="row">
 		<div class="small-8 small-centered columns">
-			<form:form modelAttribute="newMailBox" method="post" action="registerMailBox">
+			<form:form modelAttribute="mailBox" method="post" action="">
 				<fieldset>
-					<legend>Mail-Box: Registration</legend>
-					
-						<div class="label alert register-error">${responseMsg}</div>
-					
+					<legend>Edit: Mail-Box</legend>
+
+					<div class="label alert register-error">${responseMsg}</div>
+
 					<div class="row">
 						<div class="large-3 columns">
-							<label class="right"><spring:message code="mailBox.number.label" /></label>
+							<label class="right"><spring:message
+									code="mailBox.number.label" /></label>
 						</div>
 						<div class="large-6 columns">
 							<form:input type="text" path="mNumber" />
@@ -33,7 +34,8 @@
 					</div>
 					<div class="row">
 						<div class="large-3 columns">
-							<label class="right"><spring:message code="mailBox.code.label" /></label>
+							<label class="right"><spring:message
+									code="mailBox.code.label" /></label>
 						</div>
 						<div class="large-6 columns">
 							<form:input type="text" path="code" />
@@ -42,13 +44,27 @@
 							<form:errors class="label alert" path="code" />
 						</div>
 					</div>
-				
 					<div class="row">
 						<div class="large-3 columns">
+							<label class="right"><spring:message
+									code="mailBox.status.label" /></label>
 						</div>
+						<div class="large-6 columns">
+							<form:radiobutton path="status" value="Y" />
+							Active
+							<form:radiobutton path="status" value="N" />
+							Inactive
+						</div>
+						<div class="large-3 columns">
+							<form:errors class="label alert" path="status" />
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="large-3 columns"></div>
 						<div class="large-9 columns">
-							<label>
-								<input type="submit" value="REGISTER" class="button tiny" />
+							<label> <input type="submit" value="EDIT"
+								class="button tiny" />
 							</label>
 						</div>
 					</div>

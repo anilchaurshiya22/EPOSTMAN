@@ -1,6 +1,10 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <c:set var="base" value="${pageContext.servletContext.contextPath}" />
-<h2><img src="${base}/resource/images/user.png"> Users</h2>
+<h2>
+	<img src="${base}/resource/images/user.png"> Users
+</h2>
 <c:if test="${successMessage != null}">
 	<div class="panel" style="background-color: green; color: white;">${successMessage}</div>
 </c:if>
@@ -26,16 +30,21 @@
 				<td>${user}</td>
 				<td>${user.gender}</td>
 				<td>${user.status.name}</td>
-				<td>
-					<c:if test="${user.status.value eq 0}">
-						<a href='<c:url value="/enable-user/${user.id}" />' class="button tiny success">Enable</a>
-					</c:if>
-					<c:if test="${user.status.value eq 1}">
-						<a href='<c:url value="/disable-user/${user.id}" />' class="button tiny alert">Disable</a>
-					</c:if>
-					<a href='<c:url value="/user/edit/${user.id}" />' class="button tiny">Edit</a>
-					<a href='<c:url value="/user/delete/${user.id}" />' class="button tiny alert">Delete</a>
-				</td>
+				<td><security:authorize access="hasAnyRole('ROLE_ADMIN')">
+						<c:if test="${user.status.value eq 0}">
+							<a href='<c:url value="/enable-user/${user.id}" />'
+								class="button tiny success">Enable</a>
+						</c:if>
+						<c:if test="${user.status.value eq 1}">
+							<a href='<c:url value="/disable-user/${user.id}" />'
+								class="button tiny alert">Disable</a>
+						</c:if>
+					</security:authorize> <a href='<c:url value="/u/user/edit/${user.id}" />'
+					class="button tiny">Edit</a> <security:authorize
+						access="hasAnyRole('ROLE_ADMIN')">
+						<a href='<c:url value="/u/user/delete/${user.id}" />'
+							class="button tiny alert">Delete</a>
+					</security:authorize></td>
 			</tr>
 		</c:forEach>
 	</tbody>
