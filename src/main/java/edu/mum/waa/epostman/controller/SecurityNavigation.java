@@ -52,9 +52,9 @@ public class SecurityNavigation {
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public ModelAndView logoutForm(SessionStatus status) {
+	public String logoutForm(SessionStatus status) {
 		status.setComplete();
-		return new ModelAndView("login-form");
+		return "redirect:/";
 	}
 
 }

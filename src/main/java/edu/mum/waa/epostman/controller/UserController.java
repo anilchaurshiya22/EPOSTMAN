@@ -1,6 +1,8 @@
 package edu.mum.waa.epostman.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,13 +34,20 @@ public class UserController {
 
 	public UserController() {
 		modelAndView = new ModelAndView("layouts/main");
-		modelAndView.addObject("abc", "cde");
 	}
 
-	@RequestMapping(value = "/u/alluser")
-	public String getAllUser(Model model) {
-		return "userlist";
+	@RequestMapping(value = "/dashboard")
+	public ModelAndView showDashboard() {
+		modelAndView.addObject("partials", "user/dashboard");
+		return modelAndView;
 
+	}
+
+	@RequestMapping(value = "/users")
+	public ModelAndView getAllUser(Model model) {
+		modelAndView.addObject("users", userService.getRegisteredUsers());
+		modelAndView.addObject("partials", "user/user-list");
+		return modelAndView;
 	}
 
 	@RequestMapping(value = "/a/adduser")
@@ -58,7 +69,7 @@ public class UserController {
 		if (result.hasErrors()) {
 			return "register-form";
 		}
-		User user = userService.registerUser(newUser);
+		User user = userService.saveUser(newUser);
 		if (user != null) {
 			return "redirect:/register-success";
 		} else {
@@ -98,5 +109,53 @@ public class UserController {
 	public String registerSuccessPage() {
 		return "register-success";
 	}
+	
+
+	@RequestMapping(value = "/user/edit/{id}", method=RequestMethod.GET)
+	public ModelAndView updatePage(@PathVariable("id") String id) {
+		Long userId = Long.parseLong(id);
+		modelAndView.addObject("user", userService.find(userId));
+		modelAndView.addObject("partials", "user/edit-form");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/user/edit/{id}", method=RequestMethod.POST)
+	public ModelAndView pocessUpdate(@PathVariable("id") String id, @ModelAttribute("user") @Valid User editUser,
+			BindingResult result) {
+
+		if (result.hasErrors()) {
+			modelAndView.addObject("partials", "user/edit-form");
+			return modelAndView;
+		}
+
+		Long userId = Long.parseLong(id);
+		User oldUser = userService.find(userId);
+		oldUser.setFirstName(editUser.getFirstName());
+		oldUser.setLastName(editUser.getLastName());
+		oldUser.setGender(editUser.getGender());
+		oldUser.setEmail(editUser.getEmail());
+		oldUser.setContactNumber(editUser.getContactNumber());
+		oldUser.setDescription(editUser.getDescription());
+		User user = userService.saveUser(oldUser);
+		if (user != null) {
+			return new ModelAndView("redirect:/users");
+		} else {
+			modelAndView.addObject("message", "Sorry!!! Problem Occured in User Edit.");
+			modelAndView.addObject("partials", "user/edit-form");
+			return modelAndView;
+		}
+	}
+
+	@RequestMapping("/user/delete/{id}")
+	public String deleteUser(@PathVariable("id") String id, final RedirectAttributes ra) {
+		Long userId = Long.parseLong(id);
+		if(userService.find(userId) != null) {
+			userService.deleteUser(userId);
+			ra.addFlashAttribute("successMessage", "User Deleted Successfully");
+		}
+		return "redirect:/users";
+	}
+
+
 
 }
