@@ -40,11 +40,13 @@ public class MailBoxController {
 
 	@RequestMapping(value = "/registerMailBox", method = RequestMethod.POST)
 	public ModelAndView registerMailBox(
-			@ModelAttribute("newMailBox") MailBox mailBox,
+			@ModelAttribute("newMailBox") @Valid MailBox mailBox,
 			BindingResult result, Model model,
 			final RedirectAttributes redirectAttributes) {
 		mailBox.setStatus("Y");
+
 		if (result.hasErrors()) {
+
 			modelAndView.addObject("partials", "mailBox/registerMailBox");
 			return modelAndView;
 		}
@@ -96,7 +98,6 @@ public class MailBoxController {
 		MailBox mailBox = mailBoxService.findMailBoxById(userId);
 		mailBox.setCode(editMailBox.getCode());
 		mailBox.setmNumber(editMailBox.getmNumber());
-		System.out.println("STATUS===="+editMailBox.getStatus());
 		mailBox.setStatus(editMailBox.getStatus());
 		MailBox mBox = mailBoxService.registerMailBox(mailBox);
 		if (mBox != null) {
