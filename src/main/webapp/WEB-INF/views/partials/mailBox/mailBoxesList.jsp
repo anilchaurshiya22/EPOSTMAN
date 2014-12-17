@@ -26,9 +26,9 @@
 				<td><c:if test="${mailBox.status eq 'Y'}">Active</c:if> <c:if
 						test="${mailBox.status eq 'N'}">Inactive</c:if></td>
 				<td>
-					<a href="<c:url value="/mailBox/edit?id=${mailBox.id}" />"
+					<a href="<c:url value="/a/mailBox/edit/${mailBox.id}" />"
 					class="button tiny">Edit</a> <a
-					href="<c:url value="/mailBox/delete?id=${mailBox.id}" />"
+					href="<c:url value="/a/mailBox/delete/${mailBox.id}" />"
 					class="button tiny alert">Delete</a></td>
 			</tr>
 		</c:forEach>

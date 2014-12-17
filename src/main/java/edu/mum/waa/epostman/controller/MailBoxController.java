@@ -43,6 +43,7 @@ public class MailBoxController {
 			@ModelAttribute("newMailBox") MailBox mailBox,
 			BindingResult result, Model model,
 			final RedirectAttributes redirectAttributes) {
+		mailBox.setStatus("Y");
 		if (result.hasErrors()) {
 			modelAndView.addObject("partials", "mailBox/registerMailBox");
 			return modelAndView;
@@ -75,16 +76,16 @@ public class MailBoxController {
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
 	public ModelAndView updatePage(@PathVariable("id") String id) {
 		Long mailBoxId = Long.parseLong(id);
-		System.out.println("called_________!!");
-		modelAndView.addObject("mailBox", mailBoxService.findMailBoxById(mailBoxId));
-		System.out.println("called_________");
+		modelAndView.addObject("mailBox",
+				mailBoxService.findMailBoxById(mailBoxId));
 		modelAndView.addObject("partials", "mailBox/edit-form");
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
 	public ModelAndView pocessUpdate(@PathVariable("id") String id,
-			@ModelAttribute("mailBox") @Valid MailBox editMailBox, BindingResult result) {
+			@ModelAttribute("mailBox") @Valid MailBox editMailBox,
+			BindingResult result) {
 
 		if (result.hasErrors()) {
 			modelAndView.addObject("partials", "mailBox/edit-form");
@@ -93,10 +94,13 @@ public class MailBoxController {
 
 		Long userId = Long.parseLong(id);
 		MailBox mailBox = mailBoxService.findMailBoxById(userId);
-		mailBox.setCode(editMailBox.getCode());		
+		mailBox.setCode(editMailBox.getCode());
+		mailBox.setmNumber(editMailBox.getmNumber());
+		System.out.println("STATUS===="+editMailBox.getStatus());
+		mailBox.setStatus(editMailBox.getStatus());
 		MailBox mBox = mailBoxService.registerMailBox(mailBox);
 		if (mBox != null) {
-			return new ModelAndView("redirect:/mailBox");
+			return new ModelAndView("redirect:/a/mailBox");
 		} else {
 			modelAndView.addObject("message",
 					"Sorry!!! Problem Occured in Mail Box Edit.");
@@ -104,15 +108,16 @@ public class MailBoxController {
 			return modelAndView;
 		}
 	}
-	
+
 	@RequestMapping("/delete/{id}")
-	public String deleteUser(@PathVariable("id") String id, final RedirectAttributes ra) {
+	public String deleteUser(@PathVariable("id") String id,
+			final RedirectAttributes ra) {
 		Long userId = Long.parseLong(id);
-		if(mailBoxService.findMailBoxById(userId) != null) {
+		if (mailBoxService.findMailBoxById(userId) != null) {
 			mailBoxService.deleteUser(userId);
 			ra.addFlashAttribute("successMsg", "User Deleted Successfully");
 		}
-		return "redirect:/mailBox";
+		return "redirect:/a/mailBox";
 	}
 
 }
