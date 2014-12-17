@@ -1,10 +1,15 @@
 package edu.mum.waa.epostman.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -29,13 +34,17 @@ public class MailBox {
 	@Max(999)
 	private Integer mNumber;
 
-	@Column(name = "STATUS", nullable = false,length=1)
+	@Column(name = "STATUS", nullable = false, length = 1)
 	private String status;
 
 	@Column(name = "CODE")
-	@Pattern(regexp="[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}",message="{mailbox.code.msg}")
+	@Pattern(regexp = "[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}", message = "{mailbox.code.msg}")
 	@NotEmpty
 	private String code;
+
+	@OneToMany
+	@JoinColumn(name = "MAILBOX_ID", referencedColumnName = "ID")
+	List<User> users = new ArrayList<User>();
 
 	public Long getId() {
 		return id;

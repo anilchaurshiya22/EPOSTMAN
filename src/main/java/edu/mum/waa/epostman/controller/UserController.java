@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.waa.epostman.domain.User;
+import edu.mum.waa.epostman.domain.UserStatus;
+import edu.mum.waa.epostman.service.MailBoxService;
 import edu.mum.waa.epostman.service.UserService;
 import edu.mum.waa.epostman.util.SecurityUtil;
 import edu.mum.waa.epostman.validator.PasswordValidator;
@@ -30,6 +32,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private MailBoxService mailBoxService;
+	
 	@Autowired
 	PasswordValidator passwordValidator;
 
@@ -157,6 +162,51 @@ public class UserController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value = "/enable-user/{id}", method=RequestMethod.GET)
+	public ModelAndView enableUserPage(@PathVariable("id") String id) {
+		Long userId = Long.parseLong(id);
+		modelAndView.addObject("user", userService.find(userId));
+		modelAndView.addObject("mailboxes", mailBoxService.getAllMailBoxes());
+		modelAndView.addObject("partials", "user/enableUser");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value = "/enable-user/{id}", method=RequestMethod.POST)
+	public ModelAndView pocessEnableUser(@PathVariable("id") String id, @ModelAttribute("user") @Valid User editUser,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			modelAndView.addObject("partials", "user/enableUser");
+			return modelAndView;
+		}
+
+		Long userId = Long.parseLong(id);
+		User oldUser = userService.find(userId);
+		oldUser.setMailBox(editUser.getMailBox());
+		oldUser.setStatus(UserStatus.Active);
+		User user = userService.saveUser(oldUser);
+		if (user != null) {
+			return new ModelAndView("redirect:/users");
+		} else {
+			modelAndView.addObject("message", "Sorry!!! Problem Occured while enabling User.");
+			modelAndView.addObject("partials", "user/enableUser");
+			return modelAndView;
+		}
+	}
+	
+	@RequestMapping("/disable-user/{id}")
+	public String pocessDisableUser(@PathVariable("id") String id, RedirectAttributes redirectAttributes) {
+		Long userId = Long.parseLong(id);
+		User oldUser = userService.find(userId);
+		oldUser.setMailBox(null);
+		oldUser.setStatus(UserStatus.Blocked);
+		User user = userService.saveUser(oldUser);
+		if (user == null) {
+			redirectAttributes.addFlashAttribute("errorMessage", "Sorry!!! Problem Occured while enabling User.");
+		}
+		return "redirect:/users";
+		
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/uploadPhoto")
 	public String uploadPersonPhoto(@ModelAttribute("user") User user,HttpServletRequest request,RedirectAttributes model) throws FileUploadException,
 			IOException {
@@ -177,7 +227,7 @@ public class UserController {
 		userService.saveUser(newUser);
 		model.addFlashAttribute("user",newUser);
 		model.addFlashAttribute("message", "Uploaded Successfully");
-		return "redirect:/userProfile";	
+		return "redirect:/userProfile";
 	}
 
 }

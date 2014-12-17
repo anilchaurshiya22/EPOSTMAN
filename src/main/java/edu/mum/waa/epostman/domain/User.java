@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
@@ -78,6 +80,10 @@ public class User implements UserDetails, CredentialsContainer {
 
 	@Transient
 	private String oldLoginPassword;
+	
+	@ManyToOne
+	@JoinColumn(name="MAILBOX_ID")
+	private MailBox mailBox;
 
 	@Transient
 	private MultipartFile profilePic;
@@ -196,6 +202,14 @@ public class User implements UserDetails, CredentialsContainer {
 
 	public void setOldLoginPassword(String oldLoginPassword) {
 		this.oldLoginPassword = oldLoginPassword;
+	}
+
+	public MailBox getMailBox() {
+		return mailBox;
+	}
+
+	public void setMailBox(MailBox mailBox) {
+		this.mailBox = mailBox;
 	}
 
 	public String getPicLocation() {
