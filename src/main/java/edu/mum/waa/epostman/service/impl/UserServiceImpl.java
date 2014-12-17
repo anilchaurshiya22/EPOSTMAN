@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 
 	public User saveUser(User user) {
-		if(user.getId() == null)
+		if (user.getId() == null)
 			user.setStatus(UserStatus.Blocked);
 		user.setRole(Role.User);
 		return userRepository.save(user);
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 	public User find(Long id) {
 		return userRepository.findOne(id);
 	}
-	
+
 	public void deleteUser(long id) {
 		userRepository.delete(id);
 	}
@@ -45,13 +45,10 @@ public class UserServiceImpl implements UserService {
 	public User findUserByLoginId(String loginId) {
 		return userRepository.findUserByLoginId(loginId);
 	}
-	
-	public User changePassword(User user){
-		User newUser=find(user.getId());
+
+	public User changePassword(User user) {
+		User newUser = find(user.getId());
 		newUser.setLoginPassword(user.getLoginPassword());
 		return userRepository.save(newUser);
-		
-		
 	}
-
 }

@@ -1,7 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <c:if test="${successMsg != null}">
 	<div class="panel" style="background-color: green; color: white;">${successMsg}</div>
 </c:if>
@@ -9,6 +7,7 @@
 <p>
 	<a href="<c:url value="/mailBox/addMailBox"/> ">Add New Mail Box</a>
 </p>
+
 <table style="width: 100%;">
 	<thead>
 		<tr>

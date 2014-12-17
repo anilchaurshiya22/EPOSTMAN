@@ -1,5 +1,7 @@
 package edu.mum.waa.epostman.service;
 
+
+
 import java.util.List;
 
 import edu.mum.waa.epostman.domain.User;
@@ -19,5 +21,4 @@ public interface UserService {
 	User changePassword(User user);
 
 	void deleteUser(long id);
-
 }

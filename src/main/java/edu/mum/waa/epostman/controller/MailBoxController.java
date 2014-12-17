@@ -19,7 +19,7 @@ import edu.mum.waa.epostman.domain.MailBox;
 import edu.mum.waa.epostman.service.MailBoxService;
 
 @Controller
-@RequestMapping(value = "/mailBox")
+@RequestMapping(value = "/a/mailBox")
 public class MailBoxController {
 
 	@Autowired
@@ -56,7 +56,7 @@ public class MailBoxController {
 		if (mailBoxService.registerMailBox(mailBox) != null) {
 			redirectAttributes.addFlashAttribute("successMsg",
 					"Mail Box registered Successfully.");
-			return new ModelAndView("redirect:/mailBox");
+			return new ModelAndView("redirect:/a/mailBox");
 		} else {
 			model.addAttribute("responseMsg", "Sorry!!! Something went wrong.");
 			modelAndView.addObject("partials", "mailBox/registerMailBox");
