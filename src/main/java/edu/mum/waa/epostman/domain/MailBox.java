@@ -1,14 +1,20 @@
 package edu.mum.waa.epostman.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -22,20 +28,23 @@ public class MailBox {
 	@Column(name = "ID")
 	private Long id;
 
-	@NotNull
-	/*
-	 * @Min(1)
-	 * 
-	 * @Max(999)
-	 */
 	@Column(name = "NUMBER", nullable = false)
+	@NotNull
+	@Min(1)
+	@Max(999)
 	private Integer mNumber;
 
-	@Column(name = "STATUS", nullable = false)
-	private Character status;
-	@NotEmpty
+	@Column(name = "STATUS", nullable = false, length = 1)
+	private String status;
+
 	@Column(name = "CODE")
+	@Pattern(regexp = "[0-9]{1,2}-[0-9]{1,2}-[0-9]{1,2}", message = "{mailbox.code.msg}")
+	@NotEmpty
 	private String code;
+
+	@OneToMany
+	@JoinColumn(name = "MAILBOX_ID", referencedColumnName = "ID")
+	List<User> users = new ArrayList<User>();
 
 	public Long getId() {
 		return id;
@@ -53,11 +62,11 @@ public class MailBox {
 		this.mNumber = mNumber;
 	}
 
-	public Character getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Character status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

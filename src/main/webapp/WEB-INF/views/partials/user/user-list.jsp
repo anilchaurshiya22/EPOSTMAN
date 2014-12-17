@@ -8,6 +8,9 @@
 <c:if test="${successMessage != null}">
 	<div class="panel" style="background-color: green; color: white;">${successMessage}</div>
 </c:if>
+<c:if test="${errorMessage != null}">
+	<div class="panel" style="background-color: red; color: white;">${errorMessage}</div>
+</c:if>
 <table style="width: 100%;">
 	<thead>
 		<tr>
@@ -29,11 +32,11 @@
 				<td>${user.status.name}</td>
 				<td><security:authorize access="hasAnyRole('ROLE_ADMIN')">
 						<c:if test="${user.status.value eq 0}">
-							<a href='<c:url value="/enable-user/${user.id}" />'
+							<a href='<c:url value="/u/enable-user/${user.id}" />'
 								class="button tiny success">Enable</a>
 						</c:if>
 						<c:if test="${user.status.value eq 1}">
-							<a href='<c:url value="/disable-user/${user.id}" />'
+							<a href='<c:url value="/u/disable-user/${user.id}" />'
 								class="button tiny alert">Disable</a>
 						</c:if>
 					</security:authorize> <a href='<c:url value="/u/user/edit/${user.id}" />'

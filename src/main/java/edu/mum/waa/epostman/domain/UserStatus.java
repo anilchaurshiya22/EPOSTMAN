@@ -5,7 +5,7 @@ import java.util.List;
 
 public enum UserStatus {
 	
-	 Blocked("blocked", 0), Active("active", 1), Cancel("cancel", 2), ;
+	 Blocked("Inactive", 0), Active("Active", 1), Cancel("Cancel", 2), ;
 
 	private String name;
 	private int value;
