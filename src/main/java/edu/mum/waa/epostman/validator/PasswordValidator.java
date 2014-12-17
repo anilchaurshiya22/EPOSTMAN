@@ -14,12 +14,10 @@ public class PasswordValidator implements Validator {
 	UserService userService;
 
 
-	@Override
 	public boolean supports(Class<?> paramClass) {
 		return User.class.equals(paramClass);
 	}
 
-	@Override
 	public void validate(Object obj, Errors errors) {
 		User user = (User) obj;
 		User oldUser = userService.find(user.getId());

@@ -17,18 +17,15 @@ public class MailBoxServiceImpl implements MailBoxService {
 	@Autowired
 	private MailBoxRepository mailBoxRepository;
 
-	@Override
 	public MailBox registerMailBox(MailBox mailBox) {
 		mailBox.setStatus(new Character('Y'));
 		return mailBoxRepository.save(mailBox);
 	}
 
-	@Override
 	public MailBox findMailBoxByNumber(Integer mNumber) {
 		return mailBoxRepository.findMailBoxByNumber(mNumber);
 	}
 
-	@Override
 	public List<MailBox> getAllMailBoxes() {
 		return (List<MailBox>) mailBoxRepository.findAll();
 	}
