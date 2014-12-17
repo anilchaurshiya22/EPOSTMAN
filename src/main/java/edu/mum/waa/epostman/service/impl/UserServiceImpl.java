@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.mum.waa.epostman.domain.Role;
 import edu.mum.waa.epostman.domain.User;
 import edu.mum.waa.epostman.domain.UserStatus;
+import edu.mum.waa.epostman.exception.CustomGenericException;
 import edu.mum.waa.epostman.repository.UserRepository;
 import edu.mum.waa.epostman.service.UserService;
 
@@ -35,7 +36,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public User find(Long id) {
-		return userRepository.findOne(id);
+		User user = userRepository.findOne(id);
+		if (user == null){
+			throw new CustomGenericException("User Not Found", "User with Id " + id + " not found.");
+		}
+		return user;
 	}
 
 	public void deleteUser(long id) {

@@ -24,7 +24,7 @@
 					<label>Dashboard</label>
 				</a> 
 				<security:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-				<a href="<c:url value="/u//users" />" class="item"> 
+				<a href="<c:url value="/u/users" />" class="item"> 
 					<img src="${base}/resource/images/user.png">
 					<label>Users</label>
 				</a> 
