@@ -7,16 +7,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Register Mail Box</title>
+<title>Edit Mail Box</title>
 <link rel="stylesheet" href="resource/css/foundation.css"></link>
 <link rel="stylesheet" href="resource/css/main.css"></link>
 </head>
 <body>
 	<div class="row">
 		<div class="small-8 small-centered columns">
-			<form:form modelAttribute="newMailBox" method="post" action="registerMailBox">
+			<form:form modelAttribute="mailBox" method="post" action="">
 				<fieldset>
-					<legend>Mail-Box: Registration</legend>
+					<legend>Edit: Mail-Box</legend>
 					
 						<div class="label alert register-error">${responseMsg}</div>
 					

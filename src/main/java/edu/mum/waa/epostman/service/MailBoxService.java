@@ -10,4 +10,8 @@ public interface MailBoxService {
 	MailBox findMailBoxByNumber(Integer mNumber);
 
 	List<MailBox> getAllMailBoxes();
+	
+	MailBox findMailBoxById(Long id);
+	
+	 void deleteUser(long id);
 }

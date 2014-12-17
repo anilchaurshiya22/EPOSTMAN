@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -32,7 +33,8 @@ public class MailBox {
 	private Integer mNumber;
 
 	@Column(name = "STATUS", nullable = false)
-	private Character status;
+	@Size(min = 1, max = 1)
+	private String status;
 	@NotEmpty
 	@Column(name = "CODE")
 	private String code;
@@ -53,11 +55,13 @@ public class MailBox {
 		this.mNumber = mNumber;
 	}
 
-	public Character getStatus() {
+	
+
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Character status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

@@ -18,7 +18,7 @@ public class MailBoxServiceImpl implements MailBoxService {
 	private MailBoxRepository mailBoxRepository;
 
 	public MailBox registerMailBox(MailBox mailBox) {
-		mailBox.setStatus(new Character('Y'));
+		mailBox.setStatus("Y");
 		return mailBoxRepository.save(mailBox);
 	}
 
@@ -28,6 +28,15 @@ public class MailBoxServiceImpl implements MailBoxService {
 
 	public List<MailBox> getAllMailBoxes() {
 		return (List<MailBox>) mailBoxRepository.findAll();
+	}
+
+	@Override
+	public MailBox findMailBoxById(Long id) {
+		return mailBoxRepository.findOne(id);
+	}
+	
+	public void deleteUser(long id) {
+		mailBoxRepository.delete(id);
 	}
 
 }
