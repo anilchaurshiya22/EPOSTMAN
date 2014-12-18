@@ -4,7 +4,6 @@ package edu.mum.waa.epostman.domain;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,6 +48,9 @@ public class MailItem {
 	
 	@Column(name="BARCODE")
 	private String barCode;
+	
+	@Column(name="STATUS")
+	private Status status;
 	
 	@ManyToOne	
 	@JoinColumn(name = "USERID")	
@@ -127,5 +129,13 @@ public class MailItem {
 
 	public void setType(Integer type) {
 		this.type = type;
-	}	
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}		
 }

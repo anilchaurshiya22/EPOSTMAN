@@ -225,7 +225,7 @@ public class UserController {
 		userService.saveUser(newUser);
 		model.addFlashAttribute("user", newUser);
 		model.addFlashAttribute("message", "Uploaded Successfully");
-		return "redirect:/userProfile";
+		return "redirect:/u/userProfile";
 	}
 
 }

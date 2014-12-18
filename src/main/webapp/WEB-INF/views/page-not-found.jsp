@@ -19,7 +19,7 @@
 	<center>
 
 		<img
-			src="<spring:url value="resource/images/Puppet404.gif"  htmlEscape="true" />"
+			src="<spring:url value="resource/images/4o4error.png"  htmlEscape="true" />"
 			alt="Page not found  JSP!!!" />
 	
 	<H2>${requestScope['javax.servlet.error.message']}</H2>
