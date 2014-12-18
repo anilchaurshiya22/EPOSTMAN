@@ -4,7 +4,15 @@
 <c:set var="base" value="${pageContext.servletContext.contextPath}" />
 <div class="small-12 small-centered columns">
 	<h2>
-		<img src="${base}/resource/images/email.png"> Add Mail Item
+		<img src="${base}/resource/images/email.png">
+		<c:choose>
+			<c:when test="${isEdit}">
+				<legend>Edit Mail Item</legend>
+			</c:when>
+			<c:otherwise>
+				<legend>Add Mail Item</legend>
+			</c:otherwise>
+		</c:choose>
 	</h2>
 
 	<form:form modelAttribute="mailitem" method="post" action="">
@@ -43,7 +51,7 @@
 
 			<div class="large-6 columns">
 				<form:select path="type">
-					<form:option value="NONE" label="--- Select ---" />
+				<form:option value="-1" label="--- Select ---" />					
 					<form:options items="${mailTypes}" itemValue="value"
 						itemLabel="name" />
 				</form:select>
@@ -60,7 +68,7 @@
 			</div>
 			<div class="large-6 columns">
 				<form:select path="user.id">
-					<form:option value="NONE" label="--- Select ---" />
+					<form:option value="-1" label="--- Select ---" />
 					<form:options items="${users}" itemValue="id" itemLabel="username" />
 				</form:select>
 			</div>
@@ -108,9 +116,19 @@
 		</div>
 		<div class="row">
 			<div class="large-3 columns"></div>
-			<div class="large-9 columns">
-				<input type="submit" value="Add Item" class="button tiny" />
-			</div>
+			<c:choose>
+				<c:when test="${isEdit}">
+					<div class="large-9 columns">
+						<input type="submit" value="Edit Item" class="button tiny" />
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="large-9 columns">
+						<input type="submit" value="Add Item" class="button tiny" />
+					</div>
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 	</form:form>
 </div>

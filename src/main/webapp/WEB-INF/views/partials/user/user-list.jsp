@@ -27,7 +27,7 @@
 			<tr>
 				<td>${user}</td>
 				<td>${user.email}</td>
-				<td>${user}</td>
+				<td>${user.contactNumber}</td>
 				<td>${user.gender}</td>
 				<td>${user.status.name}</td>
 				<td><security:authorize access="hasAnyRole('ROLE_ADMIN')">
@@ -39,9 +39,8 @@
 							<a href='<c:url value="/u/disable-user/${user.id}" />'
 								class="button tiny alert">Disable</a>
 						</c:if>
-					</security:authorize> <a href='<c:url value="/u/user/edit/${user.id}" />'
-					class="button tiny">Edit</a> <security:authorize
-						access="hasAnyRole('ROLE_ADMIN')">
+					 <a href='<c:url value="/u/user/edit/${user.id}" />'
+					class="button tiny">Edit</a>
 						<a href='<c:url value="/u/user/delete/${user.id}" />'
 							class="button tiny alert">Delete</a>
 					</security:authorize></td>

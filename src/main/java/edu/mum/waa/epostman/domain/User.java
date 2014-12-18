@@ -219,8 +219,8 @@ public class User implements UserDetails, CredentialsContainer {
 	}
 
 	public String getPicLocation() {
-		if (picLocation == null)
-			picLocation = defaultPicLocation;
+		/*if (picLocation == null)
+			picLocation = defaultPicLocation;*/
 		return picLocation;
 	}
 
