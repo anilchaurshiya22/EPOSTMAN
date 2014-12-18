@@ -13,13 +13,12 @@
 	<thead>
 		<tr>
 			<th>Name</th>
-			<th>Description</th>
+			<!-- <th>Description</th> -->
 			<th>Item Type</th>
 			<th>User Assigned</th>
 			<th>Date of Arrival</th>
 			<th>Date of Departure</th>
 			<th>BarCode</th>
-			
 			<th>Action</th>
 		</tr>
 	</thead>
@@ -27,17 +26,24 @@
 		<c:forEach items="${mailitems}" var="mailitem">
 			<tr>
 				<td>${mailitem.name}</td>
-				<td>${mailitem.description}</td>
+				<%-- <td>${mailitem.description}</td> --%>
 				<td>${mailitem.itemType.name}</td>
 				<td>${mailitem.user}</td>
 				<td>${mailitem.arrivalDate}</td>
 				<td>${mailitem.departureDate}</td>
-				<td>${mailitem.barCode}</td>				
-				<td>
-					 <a href='<c:url value="/a/mailitem/edit/${mailitem.id}" />'
-					class="button tiny">Edit</a> 
-						<a href='<c:url value="/a/mailitem/delete/${mailitem.id}" />'
-							class="button tiny alert">Delete</a>					
+				<td>${mailitem.barCode}</td>
+				<td><a href='<c:url value="/a/mails/edit/${mailitem.id}" />'
+					class="button tiny">Edit</a> <a
+					href='<c:url value="/a/mails/delete/${mailitem.id}" />'
+					class="button tiny alert">Delete</a> <c:choose>
+						<c:when test="${mailitem.status.value==1}">
+							<a href='<c:url value="" />' class="button tiny success">Deliver</a>
+						</c:when>
+						<c:otherwise>
+							<a href='<c:url value="/a/mails/notification/${mailitem.id}" />'
+								class="button tiny success">Notify User</a>
+						</c:otherwise>
+					</c:choose>
 			</tr>
 		</c:forEach>
 	</tbody>

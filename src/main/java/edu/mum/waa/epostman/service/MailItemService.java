@@ -13,4 +13,6 @@ public interface MailItemService {
 	MailItem find(Long id);
 
 	void delete(Long id);
+
+	List<MailItem> getAllMailItemByUserId(Long userId);
 }

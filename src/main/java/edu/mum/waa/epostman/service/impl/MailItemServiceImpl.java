@@ -35,4 +35,9 @@ public class MailItemServiceImpl implements MailItemService {
 
 	}
 
+	@Override
+	public List<MailItem> getAllMailItemByUserId(Long userId) {
+		return mailItemRepo.getAllMailItems(userId);
+	}
+
 }

@@ -37,8 +37,9 @@ public class UserServiceImpl implements UserService {
 
 	public User find(Long id) {
 		User user = userRepository.findOne(id);
-		if (user == null){
-			throw new CustomGenericException("User Not Found", "User with Id " + id + " not found.");
+		if (user == null) {
+			throw new CustomGenericException("User Not Found", "User with Id "
+					+ id + " not found.");
 		}
 		return user;
 	}
@@ -59,5 +60,10 @@ public class UserServiceImpl implements UserService {
 		User newUser = find(user.getId());
 		newUser.setLoginPassword(user.getLoginPassword());
 		return userRepository.save(newUser);
+	}
+
+	@Override
+	public List<User> getAllUserByMailBoxId(Long mboxId) {
+		return userRepository.getAllUserByMailBoxId(mboxId);
 	}
 }

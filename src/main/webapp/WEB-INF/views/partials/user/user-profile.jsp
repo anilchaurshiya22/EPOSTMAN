@@ -18,8 +18,9 @@
 		<fieldset>
 			<legend>User Profile: ${user.username}</legend>
 			<div id="profilePic">
-				<img
-					src="${pageContext.servletContext.contextPath}${user.picLocation}" />
+				
+				<a class="th" ><img
+					src="${pageContext.servletContext.contextPath}${user.picLocation}" style="height: 200px;" /></a>
 			</div>
 			<form:form modelAttribute="user" class="form-horizontal" action="uploadPhoto" method="post"
 				enctype="multipart/form-data">
@@ -32,43 +33,51 @@
 				</div>
 				<form:hidden path="id"/>
 			</form:form>
-			</br> </br>
+			<a href='<c:url value="/u/user/edit/${user.id}" />'
+					class="button tiny">Edit</a> 
+			</br> 
 			<div class="row">
-				<div class="large-2 columns">
-					<label class="left"><spring:message
-							code="user.firstname.label" /></label> <label class="right">${user.firstName}</label>
+				<div class="large-8 columns">
+					<label ><spring:message
+							code="user.firstname.label" />${user.firstName}</label>
 				</div>
 			</div>
 			<div class="row">
 
-				<div class="large-2 columns">
-					<label class="left"><spring:message
-							code="user.lastname.label" /></label> <label class="right">${user.lastName}</label>
+				<div class="large-8 columns">
+					<label ><spring:message
+							code="user.lastname.label" /> ${user.lastName}</label> 
 				</div>
 			</div>
 			<div class="row">
-				<div class="large-2 columns">
-					<label class="left"><spring:message
-							code="user.gender.label" /></label> <label class="right">${user.gender}</label>
+				<div class="large-8 columns">
+					<label ><spring:message
+							code="user.gender.label" />${user.gender}</label>
 				</div>
 			</div>
 			<div class="row">
-				<div class="large-3 columns">
-					<label class="left"><spring:message
-							code="user.contact.label" /></label> <label class="right">${user.contactNumber }</label>
+				<div class="large-8 columns">
+					<label ><spring:message
+							code="user.contact.label" />${user.contactNumber}</label> 
 
 				</div>
 			</div>
 			<div class="row">
-				<div class="large-3 columns">
-					<label class="left"><spring:message code="user.email.label" /></label>
-					<label class="right">${user.email }</label>
+				<div class="large-8 columns">
+					<label ><spring:message code="user.email.label" />${user.email }</label>
+					
 
 				</div>
 			</div>
 			<div class="row">
 				<div class="large-4 columns">
-					<label class="left"><spring:message code="user.desc.label" /></label>
+					<label ><spring:message code="mailBox.number.label" />${user.mailBox.mNumber }</label>					
+					
+				</div>
+			</div>
+			<div class="row">
+				<div class="large-4 columns">
+					<label ><spring:message code="user.desc.label" /></label>
 					<textarea readonly>${user.description }</textarea>
 				</div>
 			</div>
