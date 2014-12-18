@@ -51,6 +51,10 @@ public class UserServiceImpl implements UserService {
 	public User findUserByLoginId(String loginId) {
 		return userRepository.findUserByLoginId(loginId);
 	}
+	
+	public User findUserByEmail(String email) {
+		return userRepository.findUserByEmail(email);
+	}
 
 	public User changePassword(User user) {
 		User newUser = find(user.getId());
@@ -58,7 +62,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(newUser);
 	}
 
-	@Override
 	public List<User> getAllUserByMailBoxId(Long mboxId) {
 		return userRepository.getAllUserByMailBoxId(mboxId);
 	}

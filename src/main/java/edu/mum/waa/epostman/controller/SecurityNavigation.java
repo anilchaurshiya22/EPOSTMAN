@@ -22,6 +22,9 @@ import edu.mum.waa.epostman.domain.MailItem;
 import edu.mum.waa.epostman.domain.User;
 import edu.mum.waa.epostman.service.MailItemService;
 import edu.mum.waa.epostman.service.UserService;
+import edu.mum.waa.epostman.validator.ConfirmPasswordValidator;
+import edu.mum.waa.epostman.validator.PasswordValidator;
+import edu.mum.waa.epostman.validator.UniqueUserNameAndPasswordValidator;
 
 @Controller
 @SessionAttributes("authenitcatedUser")
@@ -29,6 +32,13 @@ public class SecurityNavigation {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	ConfirmPasswordValidator confirmPasswordValidator;
+	
+	@Autowired
+	UniqueUserNameAndPasswordValidator uniqueUserNameAndPasswordValidator;
+	
 	@Autowired
 	private MailItemService mailItemService;
 
@@ -74,6 +84,9 @@ public class SecurityNavigation {
 	public String pocessRegister(@ModelAttribute("user") @Valid User newUser,
 			BindingResult result, Model model) {
 
+		confirmPasswordValidator.validate(newUser, result);
+		uniqueUserNameAndPasswordValidator.validate(newUser, result);
+		
 		if (result.hasErrors()) {
 			return "register-form";
 		}

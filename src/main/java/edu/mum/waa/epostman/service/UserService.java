@@ -13,8 +13,10 @@ public interface UserService {
 	List<User> getRegisteredUsers();
 
 	User find(Long id);
-
-	User findUserByLoginId(String loginId);
+	
+	User findUserByLoginId(String loginId);	
+	
+	User findUserByEmail(String email);
 
 	User changePassword(User user);
 

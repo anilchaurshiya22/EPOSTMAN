@@ -29,7 +29,6 @@ public class MailBoxServiceImpl implements MailBoxService {
 		return (List<MailBox>) mailBoxRepository.findAll();
 	}
 
-	@Override
 	public MailBox findMailBoxById(Long id) {
 		return mailBoxRepository.findOne(id);
 	}

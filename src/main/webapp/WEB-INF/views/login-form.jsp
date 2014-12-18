@@ -13,7 +13,7 @@
 <body>
 	<div class="row">
 		<div class="small-4 small-centered columns">
-		Language : <a href="?language=en">English</a>|<a href="?language=ne">Nepali</a>
+			<a href="?language=en">English</a> | <a href="?language=ne">नेपाली</a>
 			<form method="post" action="<c:url value='j_spring_security_check'/>">
 				<fieldset>
 					<legend><spring:message code="epostman.login.label"/></legend>

@@ -15,6 +15,7 @@
 		<div class="small-8 small-centered columns">
 			<h2>Registration Successful!</h2>
 			<h3>We will notify you shortly via email about your account activation.</h3>
+			<img src="resource/images/cartoon_devil.gif"/>
 		</div>
 	</div>
 </body>

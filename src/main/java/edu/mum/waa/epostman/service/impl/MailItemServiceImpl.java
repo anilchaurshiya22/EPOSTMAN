@@ -17,29 +17,24 @@ public class MailItemServiceImpl implements MailItemService {
 	@Autowired
 	MailItemRepository mailItemRepo;
 
-	@Override
 	public MailItem saveMailItem(MailItem mailItem) {
 		return mailItemRepo.save(mailItem);
 	}
 
-	@Override
 	public List<MailItem> findAll() {
 		return (List<MailItem>) mailItemRepo.findAll();
 	}
 
-	@Override
 	public MailItem find(Long id) {
 
 		return mailItemRepo.findOne(id);
 	}
 
-	@Override
 	public void delete(Long id) {
 		mailItemRepo.delete(id);
 
 	}
 
-	@Override
 	public List<MailItem> getAllMailItemByUserId(Long userId) {
 		return mailItemRepo.getAllMailItems(userId);
 	}
