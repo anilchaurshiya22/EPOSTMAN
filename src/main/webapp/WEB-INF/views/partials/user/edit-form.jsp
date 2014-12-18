@@ -49,18 +49,7 @@
 			<div class="large-3 columns">
 				<form:errors class="label alert" path="gender" />
 			</div>
-		</div>
-		<div class="row">
-			<div class="large-3 columns">
-				<label class="right"><spring:message code="user.email.label" /></label>
-			</div>
-			<div class="large-6 columns">
-				<form:input type="text" path="email" />
-			</div>
-			<div class="large-3 columns">
-				<form:errors class="label alert" path="email" />
-			</div>
-		</div>
+		</div>		
 		<div class="row">
 			<div class="large-3 columns">
 				<label class="right"><spring:message

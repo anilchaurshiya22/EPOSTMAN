@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -44,10 +45,10 @@ public class MailItemController {
 		modelAndView.addObject("partials", "mailItem/mailitems-list");
 		return modelAndView;
 	}	
-	@RequestMapping(value="/edit/{id}")
-	public ModelAndView editMailItem(@PathVariable("id" ) Long id){
+	@RequestMapping(value="/edit", method= RequestMethod.GET)
+	public ModelAndView editMailItem(@RequestParam("id" ) Long id){
 		modelAndView.addObject("mailitem", mailItemService.find(id));
-		modelAndView.addObject("users", userService.getRegisteredUsers());	
+		modelAndView.addObject("users", userService.getActiveUsers());	
 		modelAndView.addObject("partials", "mailItem/mailitem-form");
 		modelAndView.addObject("mailTypes", ItemType.getAllItemType());
 		isEdit=true;
@@ -57,7 +58,7 @@ public class MailItemController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView registerMailItem(@ModelAttribute("mailitem" ) MailItem mailitem) {		
-		modelAndView.addObject("users", userService.getRegisteredUsers());	
+		modelAndView.addObject("users", userService.getActiveUsers());	
 		modelAndView.addObject("partials", "mailItem/mailitem-form");
 		modelAndView.addObject("mailTypes", ItemType.getAllItemType());
 		return modelAndView;

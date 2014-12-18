@@ -15,7 +15,7 @@
 		</c:choose>
 	</h2>
 
-	<form:form modelAttribute="mailitem" method="post" action="">
+	<form:form modelAttribute="mailitem" method="post">
 		<c:if test="${message != null}">
 			<div class="label alert register-error">${message}</div>
 		</c:if>

@@ -6,9 +6,20 @@ ${message}
 <div class="row">
 	<div class="small-6 columns">
 		<div id="profilePic">
-			<a class="th"><img
+			
+			<c:choose>
+		<c:when test="${empty user.picLocation}">
+		<a class="th"><img
+				src="${pageContext.servletContext.contextPath}/resource/images/user.png"
+				style="height: 200px;" /></a>
+		</c:when>
+		<c:otherwise>
+		<a class="th"><img
 				src="${pageContext.servletContext.contextPath}${user.picLocation}"
 				style="height: 200px;" /></a>
+		</c:otherwise>
+			</c:choose>
+			
 		</div>
 		<form:form modelAttribute="user" class="form-horizontal"
 			action="uploadPhoto" method="post" enctype="multipart/form-data">

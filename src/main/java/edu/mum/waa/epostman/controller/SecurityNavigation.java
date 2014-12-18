@@ -17,13 +17,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import edu.mum.waa.epostman.domain.MailBox;
 import edu.mum.waa.epostman.domain.MailItem;
+import edu.mum.waa.epostman.domain.Role;
 import edu.mum.waa.epostman.domain.User;
 import edu.mum.waa.epostman.service.MailItemService;
 import edu.mum.waa.epostman.service.UserService;
 import edu.mum.waa.epostman.validator.ConfirmPasswordValidator;
-import edu.mum.waa.epostman.validator.PasswordValidator;
 import edu.mum.waa.epostman.validator.UniqueUserNameAndPasswordValidator;
 
 @Controller
@@ -90,6 +89,7 @@ public class SecurityNavigation {
 		if (result.hasErrors()) {
 			return "register-form";
 		}
+		newUser.setRole(Role.User);
 		User user = userService.saveUser(newUser);
 		if (user != null) {
 			return "redirect:/register-success";
@@ -122,13 +122,12 @@ public class SecurityNavigation {
 					.getAllMailItemByUserId(user.getId());
 
 			List<User> mailSharedUsers = userService.getAllUserByMailBoxId(user
-					.getMailBox().getId());
+					.getMailBox().getId(), user.getId());
 			modelAndView.addObject("mailBoxNumber", user.getMailBox()
 					.getmNumber());
 			modelAndView.addObject("mailSharedUsers", mailSharedUsers);
 			modelAndView.addObject("mailItems", mailItems);
 		}
-
 		return modelAndView;
 	}
 

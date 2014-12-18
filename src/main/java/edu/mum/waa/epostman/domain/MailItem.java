@@ -1,7 +1,5 @@
 package edu.mum.waa.epostman.domain;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,41 +19,42 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity()
 @Table(name = "MAIL_ITEM")
 public class MailItem {
-	
+
 	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
-	private Long id;	
-	
-	@Column(name="TYPE")
+	private Long id;
+
+	@Column(name = "TYPE")
 	private ItemType itemType;
-	
-	@Column(name="NAME")
+
+	@Column(name = "NAME")
 	private String name;
-	
-	@Column(name="DESCRIPTION")
+
+	@Column(name = "DESCRIPTION")
 	private String description;
-	
-	@DateTimeFormat(pattern="MM/dd/yyyy")
-    @NotNull
-	@Column(name="ARRIVALDATE")
+
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@NotNull
+	@Column(name = "ARRIVALDATE")
 	private Date arrivalDate;
-	
-	@DateTimeFormat(pattern="MM/dd/yyyy")
-    @NotNull @Past
-	@Column(name="DEPARTUREDATE")
+
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
+	@NotNull
+	@Past
+	@Column(name = "DEPARTUREDATE")
 	private Date departureDate;
-	
-	@Column(name="BARCODE")
+
+	@Column(name = "BARCODE")
 	private String barCode;
-	
-	@Column(name="STATUS")
+
+	@Column(name = "STATUS")
 	private Status status;
-	
-	@ManyToOne	
-	@JoinColumn(name = "USERID")	
+
+	@ManyToOne
+	@JoinColumn(name = "USERID")
 	private User user;
-	
+
 	@Transient
 	private Integer type;
 
@@ -124,7 +123,10 @@ public class MailItem {
 	}
 
 	public Integer getType() {
-		return type;
+		if (itemType != null)
+			return getItemType().getValue();
+		else
+			return type;
 	}
 
 	public void setType(Integer type) {
@@ -137,5 +139,5 @@ public class MailItem {
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}		
+	}
 }

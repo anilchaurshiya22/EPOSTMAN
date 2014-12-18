@@ -28,7 +28,7 @@
 						code="mailBox.code.label" /></label>
 			</div>
 			<div class="large-6 columns">
-				<form:input type="text" path="code" />
+				<form:input type="text" path="code" placeholder="NN-NN-NN"/>
 			</div>
 			<div class="large-3 columns">
 				<form:errors class="label alert" path="code" />

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.mum.waa.epostman.domain.Role;
 import edu.mum.waa.epostman.domain.User;
 import edu.mum.waa.epostman.domain.UserStatus;
 import edu.mum.waa.epostman.exception.CustomGenericException;
@@ -22,8 +21,7 @@ public class UserServiceImpl implements UserService {
 
 	public User saveUser(User user) {
 		if (user.getId() == null)
-			user.setStatus(UserStatus.Blocked);
-		user.setRole(Role.User);
+			user.setStatus(UserStatus.Blocked);		
 		return userRepository.save(user);
 	}
 
@@ -62,7 +60,11 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(newUser);
 	}
 
-	public List<User> getAllUserByMailBoxId(Long mboxId) {
-		return userRepository.getAllUserByMailBoxId(mboxId);
+	public List<User> getAllUserByMailBoxId(Long mboxId, Long uId) {
+		return userRepository.getAllUserByMailBoxId(mboxId, uId);
+	}
+	
+	public List<User> getActiveUsers(){
+		return userRepository.getActiveUsers();
 	}
 }

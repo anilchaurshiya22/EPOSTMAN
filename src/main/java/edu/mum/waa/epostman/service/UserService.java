@@ -22,5 +22,8 @@ public interface UserService {
 
 	void deleteUser(long id);
 
-	List<User> getAllUserByMailBoxId(Long mboxId);
+	List<User> getAllUserByMailBoxId(Long mboxId, Long uId);
+	
+	List<User> getActiveUsers();
+	
 }

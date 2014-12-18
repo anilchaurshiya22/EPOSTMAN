@@ -92,7 +92,6 @@ public class UserController {
 	@RequestMapping(value = "/user/edit/{id}", method = RequestMethod.POST)
 	public ModelAndView pocessUpdate(@PathVariable("id") String id,
 			@ModelAttribute("user") @Valid User editUser, BindingResult result) {
-
 		if (result.hasErrors()) {
 			modelAndView.addObject("partials", "user/edit-form");
 			return modelAndView;
@@ -129,8 +128,8 @@ public class UserController {
 
 	@RequestMapping("/settings")
 	public ModelAndView userProfile() {
-		User user = SecurityUtil.getSessionUser();
-		modelAndView.addObject("user", user);
+		User user = SecurityUtil.getSessionUser();		
+		modelAndView.addObject("user", userService.find(user.getId()));
 		modelAndView.addObject("partials", "user/user-profile");
 		return modelAndView;
 	}

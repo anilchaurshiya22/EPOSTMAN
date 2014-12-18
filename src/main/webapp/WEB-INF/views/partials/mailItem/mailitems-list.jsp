@@ -32,7 +32,7 @@
 				<td>${mailitem.arrivalDate}</td>
 				<td>${mailitem.departureDate}</td>
 				<td>${mailitem.barCode}</td>
-				<td><a href='<c:url value="/a/mails/edit/${mailitem.id}" />'
+				<td><a href='<c:url value="/a/mails/edit?id=${mailitem.id}" />'
 					class="button tiny">Edit</a> <a
 					href='<c:url value="/a/mails/delete/${mailitem.id}" />'
 					class="button tiny alert">Delete</a> <c:choose>
