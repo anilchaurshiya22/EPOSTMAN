@@ -50,6 +50,10 @@ public class UserServiceImpl implements UserService {
 	public User findUserByLoginId(String loginId) {
 		return userRepository.findUserByLoginId(loginId);
 	}
+	
+	public User findUserByEmail(String email) {
+		return userRepository.findUserByEmail(email);
+	}
 
 	public User changePassword(User user) {
 		User newUser = find(user.getId());

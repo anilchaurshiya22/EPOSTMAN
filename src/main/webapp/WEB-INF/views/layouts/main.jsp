@@ -18,7 +18,7 @@
 <body>
 	<div class="row">
 		<div class="small-12 small-centered columns">
-			<div class="icon-bar six-up"  style="background-color: rgb(67, 172, 106);">
+			<div class="icon-bar six-up"  style="background-color: #008AA1;">
 			
 				<a href="<c:url value="/dashboard" />" class="item">
 					<img src="${base}/resource/images/home.png">
@@ -51,11 +51,14 @@
 					<label><spring:message code="logout.label"/></label>
 				</a>
 			</div>
-			Language : <a href="?language=en">English</a>|<a href="?language=ne">Nepali</a>
+			<span style="float: right;margin-top:5px;"><a href="?language=en">English</a> | <a href="?language=ne">नेपाली</a></span>
 			<div style="padding: 30px;">
 				<jsp:include page="../partials/${partials}.jsp" />
 			</div>
-			<div class="small-3 small-centered columns">copyright 2014</div>
+			<div class="small-12 small-centered columns">
+				<span style="float: right">Powered by <img src="${base}/resource/images/devdevil_thumb.png" /></span>
+				<span style="text-align: center;">copyright © 2014</span>
+			</div>
 		</div>
 	</div>
 </body>

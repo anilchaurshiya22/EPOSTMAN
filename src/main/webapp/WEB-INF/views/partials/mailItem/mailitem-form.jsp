@@ -4,7 +4,7 @@
 <c:set var="base" value="${pageContext.servletContext.contextPath}" />
 <div class="small-12 small-centered columns">
 	<h2>
-		<img src="${base}/resource/images/email.png"> Add Mail Item
+		<img src="${base}/resource/images/epostman.jpg" style="width: 137px;"> Add Mail Item
 	</h2>
 
 	<form:form modelAttribute="mailitem" method="post" action="">

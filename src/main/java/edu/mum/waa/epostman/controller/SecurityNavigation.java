@@ -17,6 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import edu.mum.waa.epostman.domain.User;
 import edu.mum.waa.epostman.service.UserService;
+import edu.mum.waa.epostman.validator.ConfirmPasswordValidator;
+import edu.mum.waa.epostman.validator.PasswordValidator;
+import edu.mum.waa.epostman.validator.UniqueUserNameAndPasswordValidator;
 
 
 @Controller
@@ -25,6 +28,12 @@ public class SecurityNavigation {
 
 	@Autowired
 	UserService userService;
+
+	@Autowired
+	ConfirmPasswordValidator confirmPasswordValidator;
+	
+	@Autowired
+	UniqueUserNameAndPasswordValidator uniqueUserNameAndPasswordValidator;
 	
 	@RequestMapping(value = "/")
 	public ModelAndView mainPage(HttpServletRequest request) {
@@ -66,6 +75,9 @@ public class SecurityNavigation {
 	public String pocessRegister(@ModelAttribute("user") @Valid User newUser,
 			BindingResult result, Model model) {
 
+		confirmPasswordValidator.validate(newUser, result);
+		uniqueUserNameAndPasswordValidator.validate(newUser, result);
+		
 		if (result.hasErrors()) {
 			return "register-form";
 		}

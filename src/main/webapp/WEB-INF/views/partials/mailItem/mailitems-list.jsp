@@ -2,10 +2,10 @@
 <%@taglib uri="http://www.springframework.org/security/tags"
 	prefix="security"%>
 <c:set var="base" value="${pageContext.servletContext.contextPath}" />
-<h2>
-	<img src="${base}/resource/images/email.png"> Mail Items
+<h2 style="height:61px;">
+	<img src="${base}/resource/images/epostman.jpg" style="width: 137px;"> Mail Items
 </h2>
-<p><a href="<c:url value="/a/mails/register"/> ">Add Mail Items</a></p>
+<p style="float:right;"><a href="<c:url value="/a/mails/register"/>" class="button tiny">Add Mail Items</a></p>
 <c:if test="${successMessage != null}">
 	<div class="panel" style="background-color: green; color: white;">${successMessage}</div>
 </c:if>

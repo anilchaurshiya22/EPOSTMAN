@@ -17,6 +17,8 @@ public interface UserService {
 	User find(Long id);
 	
 	User findUserByLoginId(String loginId);	
+	
+	User findUserByEmail(String email);
 
 	User changePassword(User user);
 

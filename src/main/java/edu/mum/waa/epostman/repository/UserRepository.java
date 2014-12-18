@@ -11,9 +11,12 @@ import edu.mum.waa.epostman.domain.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
-	
+
 	@Query("SELECT u FROM User u WHERE u.username=:username")
 	User findUserByLoginId(@Param("username") String key);
+
+	@Query("SELECT u FROM User u WHERE u.email=:email")
+	User findUserByEmail(@Param("email") String key);
 	
 	@Query("SELECT u FROM User u WHERE u.role=1")
 	List<User> getRegisteredUsers();
