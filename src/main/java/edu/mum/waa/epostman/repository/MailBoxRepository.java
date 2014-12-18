@@ -6,7 +6,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import edu.mum.waa.epostman.domain.MailBox;
-import edu.mum.waa.epostman.domain.User;
 
 @Repository
 public interface MailBoxRepository extends CrudRepository<MailBox, Long> {

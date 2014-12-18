@@ -27,6 +27,22 @@
 		p:driverClassName="${jdbc.driverClassName}" p:url="${jdbc.url}"
 		p:username="${jdbc.username}" p:password="${jdbc.password}">
 	</bean>
+	
+	 <!-- database configuration -->
+    <!--  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:tcp://localhost/~/EPOSTMAN;DB_CLOSE_DELAY=-1;MODE=MySQL;INIT=runscript from 'classpath:create.sql'\;runscript from 'classpath:populate.sql'" />
+    </bean> -->
+<!-- ;INIT=runscript from 'classpath:create.sql'\;runscript from 'classpath:populate.sql' -->
+	<!-- H2 database CONSOLE -->
+	<!-- <bean id="h2Server" class="org.h2.tools.Server" factory-method="createTcpServer"
+		init-method="start" destroy-method="stop" depends-on="h2WebServer">
+		<constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9092" />
+	</bean>
+	<bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer"
+		init-method="start" destroy-method="stop">
+		<constructor-arg value="-web,-webAllowOthers,-webPort,8082" />
+	</bean> -->
 
 	<tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
 	<!-- Creates a JPA EntityManagerFactory according to JPA's standard container 
@@ -43,8 +59,8 @@
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<!-- <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop> -->
 
 			</props>
 		</property>

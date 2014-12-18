@@ -114,8 +114,7 @@ public class MailItemController {
 			updateMailItem.setStatus(Status.Notify);
 			mailItemService.saveMailItem(updateMailItem);
 			redirectAttr.addFlashAttribute("notified", true);
-			return new ModelAndView("redirect:/a/mails/");
-		
+			return new ModelAndView("redirect:/a/mails/");		
 	}
 
 

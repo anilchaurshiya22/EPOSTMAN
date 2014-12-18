@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import edu.mum.waa.epostman.domain.MailBox;
 import edu.mum.waa.epostman.domain.User;
 import edu.mum.waa.epostman.domain.UserStatus;
 import edu.mum.waa.epostman.service.MailBoxService;
