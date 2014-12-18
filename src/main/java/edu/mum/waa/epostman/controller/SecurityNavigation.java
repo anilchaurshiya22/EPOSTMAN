@@ -1,5 +1,7 @@
 package edu.mum.waa.epostman.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import edu.mum.waa.epostman.domain.MailBox;
+import edu.mum.waa.epostman.domain.MailItem;
 import edu.mum.waa.epostman.domain.User;
+import edu.mum.waa.epostman.service.MailItemService;
 import edu.mum.waa.epostman.service.UserService;
-
 
 @Controller
 @SessionAttributes("authenitcatedUser")
@@ -25,16 +29,20 @@ public class SecurityNavigation {
 
 	@Autowired
 	UserService userService;
-	
+	@Autowired
+	private MailItemService mailItemService;
+
 	@RequestMapping(value = "/")
 	public ModelAndView mainPage(HttpServletRequest request) {
-		User user=(User)request.getSession().getAttribute("authenitcatedUser");
-		ModelAndView modelAndView=null;
-		if(user!=null){			
-			modelAndView =new ModelAndView("layouts/main");
+		User user = (User) request.getSession().getAttribute(
+				"authenitcatedUser");
+		ModelAndView modelAndView = null;
+		if (user != null) {
+			modelAndView = new ModelAndView("layouts/main");
+
 			modelAndView.addObject("partials", "user/dashboard");
-		}else{
-		modelAndView = new ModelAndView("login-form");	
+		} else {
+			modelAndView = new ModelAndView("login-form");
 		}
 		return modelAndView;
 	}
@@ -50,7 +58,7 @@ public class SecurityNavigation {
 		modelAndView.addObject("error", true);
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String registerPage(Model model) {
 		model.addAttribute("user", new User());
@@ -61,7 +69,7 @@ public class SecurityNavigation {
 	public String registerSuccessPage() {
 		return "register-success";
 	}
-	
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String pocessRegister(@ModelAttribute("user") @Valid User newUser,
 			BindingResult result, Model model) {
@@ -79,26 +87,38 @@ public class SecurityNavigation {
 		}
 	}
 
-	/*@RequestMapping(value = "/dashboard")
-	public ModelAndView successLogin() {
-		ModelAndView modelAndView = new ModelAndView("welcome");
-		User user=(User) SecurityContextHolder.getContext()
-				.getAuthentication().getPrincipal();
-		modelAndView.addObject("authenitcatedUser", user);
-		return modelAndView;
-	}*/
-	
-	@RequestMapping(value = "/dashboard")
-	public ModelAndView showDashboard() {
-		ModelAndView modelAndView = new ModelAndView("layouts/main");
-		modelAndView.addObject("partials", "user/dashboard");
-		User user=(User) SecurityContextHolder.getContext()
-				.getAuthentication().getPrincipal();
-		modelAndView.addObject("authenitcatedUser", user);
-		return modelAndView;
+	/*
+	 * @RequestMapping(value = "/dashboard") public ModelAndView successLogin()
+	 * { ModelAndView modelAndView = new ModelAndView("welcome"); User
+	 * user=(User) SecurityContextHolder.getContext()
+	 * .getAuthentication().getPrincipal();
+	 * modelAndView.addObject("authenitcatedUser", user); return modelAndView; }
+	 */
 
+	@RequestMapping(value = "/dashboard")
+	public ModelAndView showDashboard(HttpServletRequest request) {
+
+		ModelAndView modelAndView = new ModelAndView("layouts/main");
+
+		modelAndView.addObject("partials", "user/dashboard");
+		User user = (User) SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
+		modelAndView.addObject("authenitcatedUser", user);
+		if (user.getRole().getValue() == 1) {
+			List<MailItem> mailItems = mailItemService
+					.getAllMailItemByUserId(user.getId());
+
+			List<User> mailSharedUsers = userService.getAllUserByMailBoxId(user
+					.getMailBox().getId());
+			modelAndView.addObject("mailBoxNumber", user.getMailBox()
+					.getmNumber());
+			modelAndView.addObject("mailSharedUsers", mailSharedUsers);
+			modelAndView.addObject("mailItems", mailItems);
+		}
+
+		return modelAndView;
 	}
-	
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutForm(SessionStatus status) {
 		status.setComplete();
