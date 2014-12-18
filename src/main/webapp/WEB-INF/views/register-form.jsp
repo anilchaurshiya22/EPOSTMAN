@@ -10,6 +10,21 @@
 <title>E-PostMan</title>
 <link rel="stylesheet" href="resource/css/foundation.css"></link>
 <link rel="stylesheet" href="resource/css/main.css"></link>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#username").on("blur", function(){
+			$.ajax({
+				url: '<c:url value="/check-availability/username/" />' + $(this).val(),
+				success: function(data) {
+					if(data != '') {
+						$('#error_username').html(data);
+					}
+				}
+			});
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="row">
@@ -90,7 +105,7 @@
 						<div class="large-6 columns">
 							<form:input type="text" path="username" />
 						</div>
-						<div class="large-3 columns">
+						<div class="large-3 columns" id="error_username">
 							<form:errors class="label alert" path="username" />
 						</div>
 					</div>

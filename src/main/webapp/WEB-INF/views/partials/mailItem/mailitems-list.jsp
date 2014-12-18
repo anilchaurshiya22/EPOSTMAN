@@ -37,7 +37,10 @@
 					href='<c:url value="/a/mails/delete/${mailitem.id}" />'
 					class="button tiny alert">Delete</a> <c:choose>
 						<c:when test="${mailitem.status.value==1}">
-							<a href='<c:url value="" />' class="button tiny success">Deliver</a>
+							<a href='<c:url value="/a/mails/deliver/${mailitem.id}" />' class="button tiny success">Deliver</a>
+						</c:when>
+						<c:when test="${mailitem.status.value==2}">
+							<span class="button tiny success">Delivered</span>
 						</c:when>
 						<c:otherwise>
 							<a href='<c:url value="/a/mails/notification/${mailitem.id}" />'

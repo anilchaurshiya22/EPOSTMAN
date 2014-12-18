@@ -97,7 +97,7 @@ public class MailItemController {
 	}
 	
 	@RequestMapping(value = "/notification/{id}")
-	public ModelAndView pocessEnableUser(@PathVariable("id") long id, RedirectAttributes redirectAttr) {
+	public ModelAndView pocessNotify(@PathVariable("id") long id, RedirectAttributes redirectAttr) {
 		MailItem mailItem=mailItemService.find(id);
 			try{
 			Mailer mailer = new GmailMailer("epostman.devdevil@gmail.com",
@@ -115,6 +115,16 @@ public class MailItemController {
 			updateMailItem.setStatus(Status.Notify);
 			mailItemService.saveMailItem(updateMailItem);
 			redirectAttr.addFlashAttribute("notified", true);
+			return new ModelAndView("redirect:/a/mails/");		
+	}
+	
+	@RequestMapping(value = "/deliver/{id}")
+	public ModelAndView pocessDeliver(@PathVariable("id") long id, RedirectAttributes redirectAttr) {
+			
+			MailItem updateMailItem=mailItemService.find(id);
+			updateMailItem.setStatus(Status.Deliver);
+			mailItemService.saveMailItem(updateMailItem);
+			redirectAttr.addFlashAttribute("delivered", true);
 			return new ModelAndView("redirect:/a/mails/");		
 	}
 

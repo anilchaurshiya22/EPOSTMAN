@@ -1,6 +1,8 @@
 package edu.mum.waa.epostman.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -11,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -135,6 +139,17 @@ public class SecurityNavigation {
 	public String logoutForm(SessionStatus status) {
 		status.setComplete();
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/check-availability/username/{username}")
+	public String check(@PathVariable("username") String username, Model model) {
+		User user = userService.findUserByLoginId(username);
+	    if(user == null)
+	    	model.addAttribute("error", false);
+	    else
+	    	model.addAttribute("error", true);
+	    
+	    return "validate_username";
 	}
 
 }
