@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(newUser);
 	}
 
-	@Override
 	public List<User> getAllUserByMailBoxId(Long mboxId) {
 		return userRepository.getAllUserByMailBoxId(mboxId);
 	}

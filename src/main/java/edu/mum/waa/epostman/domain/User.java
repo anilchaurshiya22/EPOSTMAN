@@ -41,13 +41,11 @@ public class User implements UserDetails, CredentialsContainer {
 	@Column(name = "ID")
 	private Long id;
 
-	@NotEmpty
 	@Pattern(regexp = "[A-Za-z0-9_.]{6,10}", message = "Username must be between 6 to 10 character long and only contains alphabets, numbers, underscore and dot")
 	@Column(unique = true, nullable = false, name = "USERNAME")
 	private String username;
 
 	@Column(name = "LOGINPASSWORD", nullable = false)
-	@NotEmpty
 	private String loginPassword;
 
 	@Column(name = "FIRSTNAME", nullable = false)
@@ -69,12 +67,10 @@ public class User implements UserDetails, CredentialsContainer {
 	private UserStatus status;
 
 	@Column(unique = true, nullable = false, name = "EMAIL")
-	@NotEmpty
 	@Email
 	private String email;
 
 	@Column(name = "DESCRIPTION")
-	@NotEmpty
 	private String description;
 
 	@Column(name = "LASTLOGINDATE")
