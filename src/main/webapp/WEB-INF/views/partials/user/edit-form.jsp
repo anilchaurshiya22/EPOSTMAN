@@ -30,6 +30,7 @@
 			</div>
 			<div class="large-6 columns">
 				<form:input type="text" path="lastName" />
+				<form:input type="hidden" path="email" />
 			</div>
 			<div class="large-3 columns">
 				<form:errors class="label alert" path="lastName" />

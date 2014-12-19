@@ -76,6 +76,7 @@ public class MailItemController {
 		}
 		try{
 		 mailitem = mailItemService.saveMailItem(newMailItem);
+		 isEdit=false;
 		}catch(Exception ex){
 			System.out.println("ex"+ ex.getStackTrace());
 		}
@@ -107,7 +108,7 @@ public class MailItemController {
 							mailItem.getUser(), mailItem.getName(),mailItem.getDescription(), mailItem.getItemType().getName(),mailItem.getArrivalDate(),mailItem.getBarCode());
 			String[] to = { mailItem.getUser().getEmail() };
 			mailer.send("epostman.devdevil@gmail.com", to,
-					"E-PostMan: Your account is activated.", myMessage);
+					"E-PostMan: Your Item Has Arrived. Please Pick up!!!.", myMessage);
 			}catch(Exception ex){
 				throw new CustomGenericException("Mail Not Send",ex.getMessage());
 			}
